@@ -100,26 +100,25 @@ namespace Library
       //Assert
       Assert.Equal(testList, result);
     }
-    // [Fact]
-    // public void AddAuthors_AddsAuthorsToBook_AuthorsList()
-    // {
-    //   //Arrange
-    //   Book testBook = new Book("Steven", new DateTime(1984, 12, 25), "Gun Economics");
-    //   testBook.Save();
-    //
-    //   Author testAuthors = new Author("Sleepology", "SL101", "No", "F");
-    //   testAuthors.Save();
-    //
-    //   //Act
-    //   testBook.AddAuthor(testAuthors);
-    //
-    //   List<Author> result = testBook.GetAuthors();
-    //   List<Author> testList = new List<Author>{testAuthors};
-    //
-    //   //Assert
-    //
-    //   Assert.Equal(testList, result);
-    // }
+    [Fact]
+    public void AddAuthor_AddsAuthorsToBook_AuthorsList()
+    {
+      //Arrange
+      Book testBook = new Book("The Go Programming Language", "Reference", new DateTime(2016, 10, 27));
+      testBook.Save();
+
+      Author testAuthors = new Author("Alan A. A. Donvoan");
+      testAuthors.Save();
+
+      //Act
+      testBook.AddAuthor(testAuthors);
+
+      List<Author> result = testBook.GetAuthors();
+      List<Author> testList = new List<Author>{testAuthors};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
     //
     // [Fact]
     // public void Delete_DeletesBooksAssociationsFromDatabase_BooksList()
