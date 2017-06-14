@@ -12,7 +12,7 @@ namespace Library
     private string _genre;
     private DateTime _dueDate;
 
-    public Book(string name, DateTime dueDate, string genre, int id = 0)
+    public Book(string name, string genre, DateTime dueDate, int id = 0)
     {
       _name = name;
       _genre = genre;
@@ -73,7 +73,7 @@ namespace Library
         string name = rdr.GetString(1);
         string genre = rdr.GetString(2);
         DateTime dueDate = rdr.GetDateTime(3);
-        Book newBook = new Book(name, dueDate, genre, id);
+        Book newBook = new Book(name, genre, dueDate, id);
         AllBook.Add(newBook);
       }
       if (rdr != null)
