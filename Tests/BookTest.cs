@@ -79,27 +79,27 @@ namespace Library
     }
 
 
-    // [Fact]
-    // public void GetAuthors_ReturnsAllBookAuthors_AuthorList()
-    // {
-    //   //Arrange
-    //   Book testBook = new Book("Expandrew", new DateTime(2016, 10, 20), "Game Art & Design");
-    //   testBook.Save();
-    //
-    //   Author testAuthors1 = new Author("Underwater Basketweaving", "UB107", "No", "N/A");
-    //   testAuthors1.Save();
-    //
-    //   Author testAuthors2 = new Author("Sleepology", "SL101", "No", "F");
-    //   testAuthors2.Save();
-    //
-    //   //Act
-    //   testBook.AddAuthor(testAuthors1);
-    //   List<Author> result = testBook.GetAuthors();
-    //   List<Author> testList = new List<Author> {testAuthors1};
-    //
-    //   //Assert
-    //   Assert.Equal(testList, result);
-    // }
+    [Fact]
+    public void GetAuthors_ReturnsAllBookAuthors_AuthorList()
+    {
+      //Arrange
+      Book testBook = new Book("The C Programming Language", "Reference Book", new DateTime(2018, 03, 16));
+      testBook.Save();
+
+      Author testAuthors1 = new Author("Biran W. Kernighan");
+      testAuthors1.Save();
+
+      Author testAuthors2 = new Author("Dennis M. Ritchie");
+      testAuthors2.Save();
+
+      //Act
+      testBook.AddAuthor(testAuthors1);
+      List<Author> result = testBook.GetAuthors();
+      List<Author> testList = new List<Author> {testAuthors1};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
     // [Fact]
     // public void AddAuthors_AddsAuthorsToBook_AuthorsList()
     // {

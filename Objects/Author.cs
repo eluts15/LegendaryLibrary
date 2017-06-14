@@ -180,7 +180,7 @@ namespace Library
       cmd.ExecuteNonQuery();
       conn.Close();
     }
-    //Add book's id and author's id to authors_books table
+    //Add book's id and author's id to books_authors table
     public void AddBook(Book newBook)
     {
       SqlConnection conn = DB.Connection();
