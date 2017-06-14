@@ -69,13 +69,13 @@ namespace Library
       //Arrange
       Book testBook = new Book("The Art of Deal", "Actual Garbage", new DateTime(2017, 09, 27));
       testBook.Save();
-      string newGenre = "Please burn this";
+      DateTime newDueDate = new DateTime(2017, 12, 03);
       //Act
-      testBook.Update("The Art of Deal", "Please burn this", new DateTime(2017, 09, 27));
-      string result = testBook.GetGenre();
+      testBook.Update("The Art of Deal", "Actual Garbage", new DateTime(2017, 12, 03));
+      DateTime result = testBook.GetDueDate();
 
       //Assert
-      Assert.Equal(newGenre, result);
+      Assert.Equal(newDueDate, result);
     }
 
 
