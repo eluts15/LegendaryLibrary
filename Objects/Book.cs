@@ -87,36 +87,36 @@ namespace Library
       return AllBook;
     }
 
-    // public void Save()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("INSERT INTO books (name, dueDate, genre) OUTPUT INSERTED.id VALUES (@name, @dueDate, @genre);", conn);
-    //
-    //   SqlParameter namePara = new SqlParameter("@name", this.GetName());
-    //   SqlParameter dueDate = new SqlParameter("@dueDate", this.GetDueDate());
-    //   SqlParameter genrePara = new SqlParameter("@genre", this.GetGenre());
-    //
-    //   cmd.Parameters.Add(namePara);
-    //   cmd.Parameters.Add(dueDate);
-    //   cmd.Parameters.Add(genrePara);
-    //
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   while(rdr.Read())
-    //   {
-    //     this._id = rdr.GetInt32(0);
-    //   }
-    //   if(rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if(conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO books (name, genre, due_date) OUTPUT INSERTED.id VALUES (@name, @genre, @dueDate);", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", this.GetName());
+      SqlParameter genrePara = new SqlParameter("@genre", this.GetGenre());
+      SqlParameter dueDate = new SqlParameter("@dueDate", this.GetDueDate());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(genrePara);
+      cmd.Parameters.Add(dueDate);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
     //
     // public static Book Find(int id)
     // {

@@ -34,20 +34,20 @@ namespace Library
       Assert.Equal(book1, book2);
     }
 
-    // [Fact]
-    // public void Test_Save_SavesToDatabase()
-    // {
-    //  //Arrange
-    // Book testBook = new Book("Kimlan", new DateTime(2017, 02, 28), "Software Engineering");
-    //
-    //  //Act
-    //  testBook.Save();
-    //  List<Book> result =Book.GetAll();
-    //  List<Book> testList = new List<Book>{testBook};
-    //
-    //  //Assert
-    //  Assert.Equal(testList, result);
-    // }
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+     //Arrange
+    Book testBook = new Book("The Old Man and the Sea", "Literature", new DateTime(2017, 02, 28));
+
+     //Act
+     testBook.Save();
+     List<Book> result =Book.GetAll();
+     List<Book> testList = new List<Book>{testBook};
+
+     //Assert
+     Assert.Equal(testList, result);
+    }
     //
     // [Fact]
     // public void Test_Find_FindBookInDatabase()
