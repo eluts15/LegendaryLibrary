@@ -61,20 +61,20 @@ namespace Library
       Assert.Equal(testAuthor, foundAuthor);
     }
 
-    // [Fact]
-    // public void Test_Update_UpdatesAuthorInDatabase()
-    // {
-    //   //Arrange
-    //   Author testAuthor = new Author("Sleepology", "SL101", "No", "F");
-    //   testAuthor.Save();
-    //   string newGrade = "B+";
-    //   //Act
-    //   testAuthor.Update("Sleepology", "SL101", "No", "B+");
-    //   string result =testAuthor.GetGrade();
-    //
-    //   //Assert
-    //   Assert.Equal(newGrade, result);
-    // }
+    [Fact]
+    public void Test_Update_UpdatesAuthorInDatabase()
+    {
+      //Arrange
+      Author testAuthor = new Author("John Steinbeck");
+      testAuthor.Save();
+      string newName = "Steven Steinbeck";
+      //Act
+      testAuthor.Update(newName);
+      string result = testAuthor.GetName();
+
+      //Assert
+      Assert.Equal(newName, result);
+    }
     //
     // [Fact]
     // public void Test_AddBook_AddsBookToAuthor()

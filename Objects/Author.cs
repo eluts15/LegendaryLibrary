@@ -128,32 +128,23 @@ namespace Library
      return foundAuthor;
     }
 
-    // public void Update(string name, string author_number, string completion, string grade)
-    // {
-    // SqlConnection conn = DB.Connection();
-    // conn.Open();
-    //
-    // SqlCommand cmd = new SqlCommand("UPDATE authors SET name = @name, author_number = @author_number, completion = @completion, grade = @grade WHERE id = @Id;", conn);
-    //
-    // SqlParameter namePara = new SqlParameter("@name", name);
-    // SqlParameter authorPara = new SqlParameter("@author_number", author_number);
-    // SqlParameter completionPara = new SqlParameter("@completion", completion);
-    // SqlParameter gradePara = new SqlParameter("@grade", grade);
-    // SqlParameter idPara = new SqlParameter("@Id", this.GetId());
-    //
-    // cmd.Parameters.Add(namePara);
-    // cmd.Parameters.Add(authorPara);
-    // cmd.Parameters.Add(completionPara);
-    // cmd.Parameters.Add(gradePara);
-    // cmd.Parameters.Add(idPara);
-    //
-    // this._name = name;
-    // this._author_number = author_number;
-    // this._completion = completion;
-    // this._grade = grade;
-    // cmd.ExecuteNonQuery();
-    // conn.Close();
-    // }
+    public void Update(string name)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE authors SET name = @name WHERE id = @Id;", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", name);
+      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(idPara);
+
+      this._name = name;
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
     // //Add book's id and author's id to authors_books table
     // public void AddBook(Book newBook)
     // {
