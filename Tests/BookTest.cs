@@ -119,27 +119,27 @@ namespace Library
       //Assert
       Assert.Equal(testList, result);
     }
-    //
-    // [Fact]
-    // public void Delete_DeletesBooksAssociationsFromDatabase_BooksList()
-    // {
-    //   //Arrange
-    //   Author testAuthor = new Author("Sleepology", "SL101", "No", "F");
-    //   testAuthor.Save();
-    //
-    //   Book testBooks = new Book("Steven", new DateTime(1984, 12, 25), "Gun Economics");
-    //   testBooks.Save();
-    //
-    //   //Act
-    //   testBooks.AddAuthor(testAuthor);
-    //   testBooks.Delete();
-    //
-    //   List<Book> resultAuthorBooks = testAuthor.GetBook();
-    //   List<Book> testAuthorBooks = new List<Book> {};
-    //
-    //   //Assert
-    //   Assert.Equal(testAuthorBooks, resultAuthorBooks);
-    // }
+
+    [Fact]
+    public void Delete_DeletesBooksAssociationsFromDatabase_BooksList()
+    {
+      //Arrange
+      Author testAuthor = new Author("Stephen King");
+      testAuthor.Save();
+
+      Book testBooks = new Book("It", "Horror", new DateTime(2015, 09, 29));
+      testBooks.Save();
+
+      //Act
+      testBooks.AddAuthor(testAuthor);
+      testBooks.Delete();
+
+      List<Book> resultAuthorBooks = testAuthor.GetBooks();
+      List<Book> testAuthorBooks = new List<Book> {};
+
+      //Assert
+      Assert.Equal(testAuthorBooks, resultAuthorBooks);
+    }
 
     public void Dispose()
     {
