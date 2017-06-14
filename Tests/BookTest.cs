@@ -145,7 +145,7 @@ namespace Library
     public void Dispose()
     {
       Book.DeleteAll();
-      // Author.DeleteAll();
+      Author.DeleteAll();
     }
 
 
