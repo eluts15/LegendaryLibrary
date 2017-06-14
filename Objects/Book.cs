@@ -117,41 +117,41 @@ namespace Library
         conn.Close();
       }
     }
-    //
-    // public static Book Find(int id)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT * FROM books WHERE id = @id;", conn);
-    //   SqlParameter idParameter = new SqlParameter("@id", id.ToString());
-    //
-    //   cmd.Parameters.Add(idParameter);
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   int foundId = 0;
-    //   string name = null;
-    //   DateTime dueDate = new DateTime();
-    //   string genre = null;
-    //
-    //   while(rdr.Read())
-    //   {
-    //     foundId = rdr.GetInt32(0);
-    //     name = rdr.GetString(1);
-    //     dueDate = rdr.GetDateTime(2);
-    //     genre = rdr.GetString(3);
-    //   }
-    //   Book foundBook = new Book(name, dueDate, genre, foundId);
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    //   return foundBook;
-    // }
+
+    public static Book Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM books WHERE id = @id;", conn);
+      SqlParameter idParameter = new SqlParameter("@id", id.ToString());
+
+      cmd.Parameters.Add(idParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string name = null;
+      string genre = null;
+      DateTime dueDate = new DateTime();
+
+      while(rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        name = rdr.GetString(1);
+        genre = rdr.GetString(2);
+        dueDate = rdr.GetDateTime(3);
+      }
+      Book foundBook = new Book(name, genre, dueDate, foundId);
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundBook;
+    }
     //
     // public void Update(string name, DateTime dueDate, string genre)
     // {

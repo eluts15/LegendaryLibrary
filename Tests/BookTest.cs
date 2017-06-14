@@ -48,21 +48,21 @@ namespace Library
      //Assert
      Assert.Equal(testList, result);
     }
-    //
-    // [Fact]
-    // public void Test_Find_FindBookInDatabase()
-    // {
-    //   //Arrange
-    //   Book testBook = new Book("Expandrew", new DateTime(2016, 10, 20), "Game Art & Design");
-    //   testBook.Save();
-    //
-    //   //Act
-    //   Book foundBook = Book.Find(testBook.GetId());
-    //
-    //   //Assert
-    //   Assert.Equal(testBook, foundBook);
-    // }
-    //
+
+    [Fact]
+    public void Test_Find_FindBookInDatabase()
+    {
+      //Arrange
+      Book testBook = new Book("The Hobbit", "Fantasy", new DateTime(2017, 07, 21));
+      testBook.Save();
+
+      //Act
+      Book foundBook = Book.Find(testBook.GetId());
+
+      //Assert
+      Assert.Equal(testBook, foundBook);
+    }
+
     // [Fact]
     // public void GetAuthors_ReturnsAllBookAuthors_AuthorList()
     // {
