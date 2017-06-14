@@ -63,6 +63,22 @@ namespace Library
       Assert.Equal(testBook, foundBook);
     }
 
+    [Fact]
+    public void Test_Update_UpdatesBookInDatabase()
+    {
+      //Arrange
+      Book testBook = new Book("The Art of Deal", "Actual Garbage", new DateTime(2017, 09, 27));
+      testBook.Save();
+      string newGenre = "Please burn this";
+      //Act
+      testBook.Update("The Art of Deal", "Please burn this", new DateTime(2017, 09, 27));
+      string result = testBook.GetGenre();
+
+      //Assert
+      Assert.Equal(newGenre, result);
+    }
+
+
     // [Fact]
     // public void GetAuthors_ReturnsAllBookAuthors_AuthorList()
     // {
@@ -84,22 +100,6 @@ namespace Library
     //   //Assert
     //   Assert.Equal(testList, result);
     // }
-    //
-    // [Fact]
-    // public void Test_Update_UpdatesBookInDatabase()
-    // {
-    //   //Arrange
-    //   Book testBook = new Book("Steven", new DateTime(1984, 12, 25), "Gun Economics");
-    //   testBook.Save();
-    //   string newMajor = "Performance Art";
-    //   //Act
-    //   testBook.Update("Steven", new DateTime(1984, 12, 25), "Performance Art");
-    //   string result =testBook.GetMajor();
-    //
-    //   //Assert
-    //   Assert.Equal(newMajor, result);
-    // }
-    //
     // [Fact]
     // public void AddAuthors_AddsAuthorsToBook_AuthorsList()
     // {

@@ -152,31 +152,31 @@ namespace Library
       }
       return foundBook;
     }
-    //
-    // public void Update(string name, DateTime dueDate, string genre)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("UPDATE books SET name = @name, dueDate = @dueDate, genre = @genre WHERE id = @Id;", conn);
-    //
-    //   SqlParameter namePara = new SqlParameter("@name", name);
-    //   SqlParameter dueDatePara = new SqlParameter("@dueDate", dueDate);
-    //   SqlParameter genrePara = new SqlParameter("@genre", genre);
-    //   SqlParameter idPara = new SqlParameter("@Id", this.GetId());
-    //
-    //   cmd.Parameters.Add(namePara);
-    //   cmd.Parameters.Add(dueDatePara);
-    //   cmd.Parameters.Add(genrePara);
-    //   cmd.Parameters.Add(idPara);
-    //
-    //   this._name = name;
-    //   this._dueDate = dueDate;
-    //   this._genre = genre;
-    //   cmd.ExecuteNonQuery();
-    //   conn.Close();
-    // }
-    //
+
+    public void Update(string name, string genre, DateTime dueDate)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE books SET name = @name, due_date = @dueDate, genre = @genre WHERE id = @Id;", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", name);
+      SqlParameter genrePara = new SqlParameter("@genre", genre);
+      SqlParameter dueDatePara = new SqlParameter("@dueDate", dueDate);
+      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(genrePara);
+      cmd.Parameters.Add(dueDatePara);
+      cmd.Parameters.Add(idPara);
+
+      this._name = name;
+      this._genre = genre;
+      this._dueDate = dueDate;
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
+
     //
     // public List<Author> GetAuthors()
     // {
