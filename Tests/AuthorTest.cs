@@ -48,19 +48,19 @@ namespace Library
       //Assert
       Assert.Equal(testList, result);
     }
-    //
-    // [Fact]
-    // public void Test_Find_FindsAuthorInDatabase()
-    // {
-    //   //Arrange
-    //   Author testAuthor = new Author("Beat Poetry", "Lit501", "Yes", "B");
-    //   testAuthor.Save();
-    //   //Act
-    //   Author foundAuthor = Author.Find(testAuthor.GetId());
-    //   //Assert
-    //   Assert.Equal(testAuthor, foundAuthor);
-    // }
-    //
+
+    [Fact]
+    public void Test_Find_FindsAuthorInDatabase()
+    {
+      //Arrange
+      Author testAuthor = new Author("G.R.R. Martin");
+      testAuthor.Save();
+      //Act
+      Author foundAuthor = Author.Find(testAuthor.GetId());
+      //Assert
+      Assert.Equal(testAuthor, foundAuthor);
+    }
+
     // [Fact]
     // public void Test_Update_UpdatesAuthorInDatabase()
     // {

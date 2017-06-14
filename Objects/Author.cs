@@ -97,36 +97,37 @@ namespace Library
      }
     }
 
-    // public static Author Find(int id)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT * FROM authors WHERE id = @id;", conn);
-    //   SqlParameter IdPara = new SqlParameter("@id", id.ToString());
-    //   cmd.Parameters.Add(IdPara);
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   int foundid = 0;
-    //   string name = null;
-    //
-    //   while(rdr.Read())
-    //   {
-    //     foundid = rdr.GetInt32(0);
-    //     name = rdr.GetString(1);
-    //   }
-    //   Author foundAuthor = new Author(name);
-    //   if (rdr != null)
-    //   {
-    //    rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //    conn.Close();
-    //   }
-    //  return foundAuthor;
-    // }
-    //
+    public static Author Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM authors WHERE id = @id;", conn);
+      SqlParameter IdPara = new SqlParameter("@id", id.ToString());
+
+      cmd.Parameters.Add(IdPara);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string name = null;
+
+      while(rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        name = rdr.GetString(1);
+      }
+      Author foundAuthor = new Author(name, foundId);
+      if (rdr != null)
+      {
+       rdr.Close();
+      }
+      if (conn != null)
+      {
+       conn.Close();
+      }
+     return foundAuthor;
+    }
+
     // public void Update(string name, string author_number, string completion, string grade)
     // {
     // SqlConnection conn = DB.Connection();
