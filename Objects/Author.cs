@@ -71,6 +71,41 @@ namespace Library
       return AllAuthor;
     }
 
+    public List<Book> GetBooks()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT books.* FROM authors JOIN books_authors ON (authors.id = books_authors.author_id) JOIN books ON (books_authors.book_id = books.id) WHERE authors.id = @authorId;", conn);
+      SqlParameter AuthorIdParam = new SqlParameter("@authorId", this.GetId().ToString());
+
+      cmd.Parameters.Add(AuthorIdParam);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Book> books = new List<Book>{};
+
+      while(rdr.Read())
+      {
+        int bookId = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        string genre = rdr.GetString(2);
+        DateTime dueDate = rdr.GetDateTime(3);
+        Book newBook = new Book(name, genre, dueDate, bookId);
+        books.Add(newBook);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return books;
+    }
+
     public void Save()
     {
      SqlConnection conn = DB.Connection();
@@ -145,26 +180,26 @@ namespace Library
       cmd.ExecuteNonQuery();
       conn.Close();
     }
-    // //Add book's id and author's id to authors_books table
-    // public void AddBook(Book newBook)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("INSERT INTO authors_books (authors_id, books_id) VALUES (@AuthorId, @BookId);", conn);
-    //
-    //   SqlParameter authorIdParameter = new SqlParameter("@AuthorId", this.GetId());
-    //   SqlParameter bookIdParameter = new SqlParameter( "@BookId", newBook.GetId());
-    //
-    //   cmd.Parameters.Add(authorIdParameter);
-    //   cmd.Parameters.Add(bookIdParameter);
-    //   cmd.ExecuteNonQuery();
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
-    //
+    //Add book's id and author's id to authors_books table
+    public void AddBook(Book newBook)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO books_authors (book_id, author_id) VALUES (@BookId, @AuthorId);", conn);
+
+      SqlParameter bookIdParameter = new SqlParameter( "@BookId", newBook.GetId());
+      SqlParameter authorIdParameter = new SqlParameter("@AuthorId", this.GetId());
+
+      cmd.Parameters.Add(bookIdParameter);
+      cmd.Parameters.Add(authorIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     // public void Delete()
     // {
     //   SqlConnection conn = DB.Connection();
@@ -181,43 +216,6 @@ namespace Library
     //     conn.Close();
     //   }
     // }
-    //
-    // public List<Book> GetBook()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT books.* FROM authors JOIN authors_books ON (authors.id = authors_books.authors_id) JOIN books ON (authors_books.books_id = books.id) WHERE authors.id = @authorId;", conn);
-    //   SqlParameter AuthorIdParam = new SqlParameter("@authorId", this.GetId().ToString());
-    //
-    //   cmd.Parameters.Add(AuthorIdParam);
-    //
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   List<Book> books = new List<Book>{};
-    //
-    //   while(rdr.Read())
-    //   {
-    //     int bookId = rdr.GetInt32(0);
-    //     string name = rdr.GetString(1);
-    //     DateTime enrollment = rdr.GetDateTime(2);
-    //     string major = rdr.GetString(3);
-    //   Book newBook = new Book(name, enrollment, major, bookId);
-    //     books.Add(newBook);
-    //   }
-    //
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    //   return books;
-    // }
-    //
-    //
     //
 
     public static void DeleteAll()

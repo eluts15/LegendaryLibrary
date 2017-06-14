@@ -75,53 +75,53 @@ namespace Library
       //Assert
       Assert.Equal(newName, result);
     }
-    //
-    // [Fact]
-    // public void Test_AddBook_AddsBookToAuthor()
-    // {
-    //   //Arrange
-    //   Author testAuthor = new Author("Sleepology", "SL101", "No", "F");
-    //   testAuthor.Save();
-    //
-    //   Book testBook = new Book("Expandrew", new DateTime(2016, 10, 20), "Game Art & Design");
-    //   testBook.Save();
-    //
-    //   Book testBook2 = new Book("Kimlan", new DateTime(2017, 02, 28), "Software Engineering");
-    //   testBook2.Save();
-    //
-    //   //Act
-    //   testAuthor.AddBook(testBook);
-    //   testAuthor.AddBook(testBook2);
-    //
-    //   List<Book> result = testAuthor.GetBook();
-    //   List<Book> testList = new List<Book>{testBook, testBook2};
-    //
-    //   //Assert
-    //   Assert.Equal(testList, result);
-    // }
-    //
-    // [Fact]
-    // public void GetBook_ReturnsAllAuthorBook_BookList()
-    // {
-    //  //Arrange
-    //  Author testAuthor = new Author("Underwater Basketweaving", "UB107", "No", "N/A");
-    //  testAuthor.Save();
-    //
-    //  Book testBook1 = new Book("MaryAnne", new DateTime(2015, 05, 14), "Marine Biology");
-    //  testBook1.Save();
-    //
-    //  Book testBook2 = new Book("Garth", new DateTime(2014, 09, 05), "Literature");
-    //  testBook2.Save();
-    //
-    //  //Act
-    //  testAuthor.AddBook(testBook1);
-    //  List<Book> savedBook = testAuthor.GetBook();
-    //  List<Book> testList = new List<Book> {testBook1};
-    //
-    //  //Assert
-    //  Assert.Equal(testList, savedBook);
-    // }
-    //
+
+    [Fact]
+    public void GetBooks_ReturnsAllAuthorBook_BookList()
+    {
+     //Arrange
+     Author testAuthor = new Author("Ursula K. Le Guin");
+     testAuthor.Save();
+
+     Book testBook1 = new Book("A Wrinkle In Time", "Fantasy", new DateTime(2019, 08, 15));
+     testBook1.Save();
+
+     Book testBook2 = new Book("A Wizard of EarthSea", "Fantasy", new DateTime(2014, 09, 05));
+     testBook2.Save();
+
+     //Act
+     testAuthor.AddBook(testBook1);
+     List<Book> savedBook = testAuthor.GetBooks();
+     List<Book> testList = new List<Book> {testBook1};
+
+     //Assert
+     Assert.Equal(testList, savedBook);
+    }
+
+    [Fact]
+    public void Test_AddBook_AddsBookToAuthor()
+    {
+      //Arrange
+      Author testAuthor = new Author("Kurt Vonnegut, Jr.");
+      testAuthor.Save();
+
+      Book testBook = new Book("Slaughterhouse Five", "Fiction", new DateTime(2017, 05, 09));
+      testBook.Save();
+
+      Book testBook2 = new Book("Breakfast of Champions", "Fiction", new DateTime(2017, 07, 02));
+      testBook2.Save();
+
+      //Act
+      testAuthor.AddBook(testBook);
+      testAuthor.AddBook(testBook2);
+
+      List<Book> result = testAuthor.GetBooks();
+      List<Book> testList = new List<Book>{testBook, testBook2};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
     // [Fact]
     // public void Delete_DeletesAuthorAssociationsFromDatabase_AuthorList()
     // {
