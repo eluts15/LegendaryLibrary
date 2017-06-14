@@ -34,20 +34,20 @@ namespace Library
       Assert.Equal(author1, author2);
     }
 
-    // [Fact]
-    // public void Test_Save_SaveAuthorToDatabase()
-    // {
-    //   //Arrange
-    //   Author testAuthor = new Author("circuit design", "CS171", "No", "N/A");
-    //   testAuthor.Save();
-    //
-    //   //Act
-    //   List<Author> result = Author.GetAll();
-    //   List<Author> testList = new List<Author>{testAuthor};
-    //
-    //   //Assert
-    //   Assert.Equal(testList, result);
-    // }
+    [Fact]
+    public void Test_Save_SaveAuthorToDatabase()
+    {
+      //Arrange
+      Author testAuthor = new Author("J.R.R. Tolkien");
+      testAuthor.Save();
+
+      //Act
+      List<Author> result = Author.GetAll();
+      List<Author> testList = new List<Author>{testAuthor};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
     //
     // [Fact]
     // public void Test_Find_FindsAuthorInDatabase()

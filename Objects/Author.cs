@@ -71,31 +71,31 @@ namespace Library
       return AllAuthor;
     }
 
-    // public void Save()
-    // {
-    //  SqlConnection conn = DB.Connection();
-    //  conn.Open();
-    //
-    //  SqlCommand cmd = new SqlCommand("INSERT INTO authors (name) OUTPUT INSERTED.id VALUES (@name);", conn);
-    //
-    //  SqlParameter namePara = new SqlParameter("@name", this.GetName());
-    //
-    //  cmd.Parameters.Add(namePara);
-    //  SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //  while(rdr.Read())
-    //  {
-    //    this._id = rdr.GetInt32(0);
-    //  }
-    //  if (rdr != null)
-    //  {
-    //    rdr.Close();
-    //  }
-    //  if (conn != null)
-    //  {
-    //    conn.Close();
-    //  }
-    // }
+    public void Save()
+    {
+     SqlConnection conn = DB.Connection();
+     conn.Open();
+
+     SqlCommand cmd = new SqlCommand("INSERT INTO authors (name) OUTPUT INSERTED.id VALUES (@name);", conn);
+
+     SqlParameter namePara = new SqlParameter("@name", this.GetName());
+
+     cmd.Parameters.Add(namePara);
+     SqlDataReader rdr = cmd.ExecuteReader();
+
+     while(rdr.Read())
+     {
+       this._id = rdr.GetInt32(0);
+     }
+     if (rdr != null)
+     {
+       rdr.Close();
+     }
+     if (conn != null)
+     {
+       conn.Close();
+     }
+    }
 
     // public static Author Find(int id)
     // {
