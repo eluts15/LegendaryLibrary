@@ -24,15 +24,15 @@ namespace Library
       Assert.Equal(0, result);
     }
 
-    // [Fact]
-    // public void Test_Override_ObjectsAreEqual()
-    // {
-    //   //Arrange, Act
-    //   Book book1 = new Book("Moby Dick'd", "required reading", new DateTime(1851, 11, 14));
-    //   Book book2 = new Book("Moby Dick'd", "required reading", new DateTime(1851, 11, 14));
-    //   //Assert
-    //   Assert.Equal(book1, book2);
-    // }
+    [Fact]
+    public void Test_Override_ObjectsAreEqual()
+    {
+      //Arrange, Act
+      Author author1 = new Author("Herman Melville");
+      Author author2 = new Author("Herman Melville");
+      //Assert
+      Assert.Equal(author1, author2);
+    }
 
     // [Fact]
     // public void Test_Save_SaveAuthorToDatabase()
