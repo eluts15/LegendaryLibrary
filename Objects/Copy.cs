@@ -117,41 +117,41 @@ namespace Library
         conn.Close();
       }
     }
-    
-    // public static Copy Find(int id)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT * FROM copies WHERE id = @id;", conn);
-    //   SqlParameter idParameter = new SqlParameter("@id", id.ToString());
-    //
-    //   cmd.Parameters.Add(idParameter);
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   int foundId = 0;
-    //   string name = null;
-    //   int inStock = 0;
-    //   int checkedOut = 0;
-    //
-    //   while(rdr.Read())
-    //   {
-    //     foundId = rdr.GetInt32(0);
-    //     name = rdr.GetString(1);
-    //     inStock = rdr.GetInt32(2);
-    //     checkedOut = rdr.GetInt32(3);
-    //   }
-    //   Copy foundCopy = new Copy(name, inStock, checkedOut, foundId);
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    //   return foundCopy;
-    // }
+
+    public static Copy Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM copies WHERE id = @id;", conn);
+      SqlParameter idParameter = new SqlParameter("@id", id.ToString());
+
+      cmd.Parameters.Add(idParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string name = null;
+      int inStock = 0;
+      int checkedOut = 0;
+
+      while(rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        name = rdr.GetString(1);
+        inStock = rdr.GetInt32(2);
+        checkedOut = rdr.GetInt32(3);
+      }
+      Copy foundCopy = new Copy(name, inStock, checkedOut, foundId);
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundCopy;
+    }
     //
     // public void Update(string name, int inStock, int checkedOut)
     // {

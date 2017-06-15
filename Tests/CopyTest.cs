@@ -49,20 +49,20 @@ namespace Library
      Assert.Equal(testList, result);
     }
 
-    // [Fact]
-    // public void Test_Find_FindCopyInDatabase()
-    // {
-    //   //Arrange
-    //   Copy testCopy = new Copy("The Hobbit", "Fantasy", new DateTime(2017, 07, 21));
-    //   testCopy.Save();
-    //
-    //   //Act
-    //   Copy foundCopy = Copy.Find(testCopy.GetId());
-    //
-    //   //Assert
-    //   Assert.Equal(testCopy, foundCopy);
-    // }
-    //
+    [Fact]
+    public void Test_Find_FindCopyInDatabase()
+    {
+      //Arrange
+      Copy testCopy = new Copy("The Hobbit", 4, 3);
+      testCopy.Save();
+
+      //Act
+      Copy foundCopy = Copy.Find(testCopy.GetId());
+
+      //Assert
+      Assert.Equal(testCopy, foundCopy);
+    }
+
     // [Fact]
     // public void Test_Update_UpdatesCopyInDatabase()
     // {
