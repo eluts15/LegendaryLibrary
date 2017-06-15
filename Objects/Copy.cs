@@ -153,29 +153,29 @@ namespace Library
       return foundCopy;
     }
     //
-    // public void Update(string name, int inStock, int checkedOut)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name, checked_out = @checkedOut, in_stock = @inStock WHERE id = @Id;", conn);
-    //
-    //   SqlParameter namePara = new SqlParameter("@name", name);
-    //   SqlParameter inStockPara = new SqlParameter("@inStock", inStock);
-    //   SqlParameter checkedOutPara = new SqlParameter("@checkedOut", checkedOut);
-    //   SqlParameter idPara = new SqlParameter("@Id", this.GetId());
-    //
-    //   cmd.Parameters.Add(namePara);
-    //   cmd.Parameters.Add(inStockPara);
-    //   cmd.Parameters.Add(checkedOutPara);
-    //   cmd.Parameters.Add(idPara);
-    //
-    //   this._name = name;
-    //   this._inStock = inStock;
-    //   this._checkedOut = checkedOut;
-    //   cmd.ExecuteNonQuery();
-    //   conn.Close();
-    // }
+    public void Update(string name, int inStock, int checkedOut)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name, checked_out = @checkedOut, in_stock = @inStock WHERE id = @Id;", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", name);
+      SqlParameter inStockPara = new SqlParameter("@inStock", inStock);
+      SqlParameter checkedOutPara = new SqlParameter("@checkedOut", checkedOut);
+      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(inStockPara);
+      cmd.Parameters.Add(checkedOutPara);
+      cmd.Parameters.Add(idPara);
+
+      this._name = name;
+      this._inStock = inStock;
+      this._checkedOut = checkedOut;
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
     //
     //
     // public List<Author> GetAuthors()

@@ -63,22 +63,22 @@ namespace Library
       Assert.Equal(testCopy, foundCopy);
     }
 
-    // [Fact]
-    // public void Test_Update_UpdatesCopyInDatabase()
-    // {
-    //   //Arrange
-    //   Copy testCopy = new Copy("The Art of Deal", "Actual Garbage", new DateTime(2017, 09, 27));
-    //   testCopy.Save();
-    //   DateTime newDueDate = new DateTime(2017, 12, 03);
-    //   //Act
-    //   testCopy.Update("The Art of Deal", "Actual Garbage", new DateTime(2017, 12, 03));
-    //   DateTime result = testCopy.GetDueDate();
-    //
-    //   //Assert
-    //   Assert.Equal(newDueDate, result);
-    // }
-    //
-    //
+    [Fact]
+    public void Test_Update_UpdatesCopyInDatabase()
+    {
+      //Arrange
+      Copy testCopy = new Copy("The Art of Deal", 1, 0);
+      testCopy.Save();
+      int inStock = 0;
+      //Act
+      testCopy.Update("The Art of Deal", inStock, 0);
+     int result = testCopy.GetInStock();
+
+      //Assert
+      Assert.Equal(inStock, result);
+    }
+
+
     // [Fact]
     // public void GetAuthors_ReturnsAllCopyAuthors_AuthorList()
     // {
