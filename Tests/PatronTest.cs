@@ -23,17 +23,17 @@ namespace Library
       //Assert
       Assert.Equal(0, result);
     }
-    
-    // [Fact]
-    // public void Test_Override_ObjectsAreEqual()
-    // {
-    //   //Arrange, Act
-    //   Patron Patron1 = new Patron("Herman Melville");
-    //   Patron Patron2 = new Patron("Herman Melville");
-    //   //Assert
-    //   Assert.Equal(Patron1, Patron2);
-    // }
-    //
+
+    [Fact]
+    public void Test_Override_ObjectsAreEqual()
+    {
+      //Arrange, Act
+      Patron Patron1 = new Patron("Andrew Dalton");
+      Patron Patron2 = new Patron("Andrew Dalton");
+      //Assert
+      Assert.Equal(Patron1, Patron2);
+    }
+
     // [Fact]
     // public void Test_Save_SavePatronToDatabase()
     // {

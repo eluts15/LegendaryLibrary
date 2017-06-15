@@ -23,26 +23,26 @@ namespace Library
       return _name;
     }
 
-  //   public override bool Equals(System.Object otherPatron)
-  //   {
-  //    if(!(otherPatron is Patron))
-  //    {
-  //      return false;
-  //    }
-  //    else
-  //     {
-  //      Patron newPatron = (Patron) otherPatron;
-  //      bool idEquality = (this.GetId() == newPatron.GetId());
-  //      bool nameEquality = (this.GetName() == newPatron.GetName());
-  //      return (idEquality && nameEquality);
-  //     }
-  //   }
-  //
-  //   public override int GetHashCode()
-  //   {
-  //     return this.GetName().GetHashCode();
-  //   }
-  //
+    public override bool Equals(System.Object otherPatron)
+    {
+     if(!(otherPatron is Patron))
+     {
+       return false;
+     }
+     else
+      {
+       Patron newPatron = (Patron) otherPatron;
+       bool idEquality = (this.GetId() == newPatron.GetId());
+       bool nameEquality = (this.GetName() == newPatron.GetName());
+       return (idEquality && nameEquality);
+      }
+    }
+
+    public override int GetHashCode()
+    {
+      return this.GetName().GetHashCode();
+    }
+  
     public static List<Patron> GetAll()
     {
       List<Patron> AllPatron = new List<Patron>{};
