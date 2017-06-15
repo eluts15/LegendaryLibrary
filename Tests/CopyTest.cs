@@ -28,8 +28,8 @@ namespace Library
     public void Test_Override_ObjectsAreEqual()
     {
       //Arrange, Act
-      Copy Copy1 = new Copy("Moby Dick'd");
-      Copy Copy2 = new Copy("Moby Dick'd");
+      Copy Copy1 = new Copy("Moby Dick'd", new DateTime(1851, 11, 14));
+      Copy Copy2 = new Copy("Moby Dick'd", new DateTime(1851, 11, 14));
       //Assert
       Assert.Equal(Copy1, Copy2);
     }
@@ -38,7 +38,7 @@ namespace Library
     public void Test_Save_SavesToDatabase()
     {
      //Arrange
-    Copy testCopy = new Copy("The Old Man and the Sea");
+    Copy testCopy = new Copy("The Old Man and the Sea", new DateTime(2016, 04, 04));
 
      //Act
      testCopy.Save();
@@ -53,7 +53,7 @@ namespace Library
     public void Test_Find_FindCopyInDatabase()
     {
       //Arrange
-      Copy testCopy = new Copy("The Hobbit");
+      Copy testCopy = new Copy("The Hobbit", new DateTime(2016, 04, 04));
       testCopy.Save();
 
       //Act
@@ -67,12 +67,12 @@ namespace Library
     public void Test_Update_UpdatesCopyInDatabase()
     {
       //Arrange
-      Copy testCopy = new Copy("The Art of Deal");
+      Copy testCopy = new Copy("The Art of Deal", new DateTime(2016, 04, 23));
       testCopy.Save();
       string newName = "Please don't read this.... please.";
       //Act
-      testCopy.Update(newName);
-     string result = testCopy.GetName();
+      testCopy.Update(newName, new DateTime(2017, 05, 21));
+      string result = testCopy.GetName();
 
       //Assert
       Assert.Equal(newName, result);
@@ -84,7 +84,7 @@ namespace Library
     public void GetPatrons_ReturnsAllCopyPatrons_PatronList()
     {
       //Arrange
-      Copy testCopy = new Copy("The C Programming Language");
+      Copy testCopy = new Copy("The C Programming Language", new DateTime(2016, 04, 04));
       testCopy.Save();
 
       Patron testPatrons1 = new Patron("B-r0n Whitwicky");
@@ -105,7 +105,7 @@ namespace Library
     public void AddPatron_AddsPatronsToCopy_PatronsList()
     {
       //Arrange
-      Copy testCopy = new Copy("The Go Programming Language");
+      Copy testCopy = new Copy("The Go Programming Language", new DateTime(2016, 04, 04));
       testCopy.Save();
 
       Patron testPatrons = new Patron("Alan Alda");
@@ -128,7 +128,7 @@ namespace Library
       Patron testPatron = new Patron("Kevin Bevins");
       testPatron.Save();
 
-      Copy testCopys = new Copy("It");
+      Copy testCopys = new Copy("It", new DateTime(2016, 04, 04));
       testCopys.Save();
 
       //Act

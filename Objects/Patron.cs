@@ -164,7 +164,8 @@ namespace Library
       {
         int copyId = rdr.GetInt32(0);
         string name = rdr.GetString(1);
-        Copy newCopy = new Copy(name, copyId);
+        DateTime due = rdr.GetDateTime(2);
+        Copy newCopy = new Copy(name, due, copyId);
         Copies.Add(newCopy);
       }
 

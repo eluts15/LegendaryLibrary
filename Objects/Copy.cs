@@ -9,10 +9,12 @@ namespace Library
   {
     private int _id;
     private string _name;
+    private DateTime _due;
 
-    public Copy(string name, int id = 0)
+    public Copy(string name, DateTime due, int id = 0)
     {
       _name = name;
+      _due = due;
       _id = id;
     }
 
@@ -24,7 +26,10 @@ namespace Library
     {
       return _name;
     }
-
+    public DateTime GetDue()
+    {
+      return _due;
+    }
 
     public override bool Equals(System.Object otherCopy)
     {
@@ -37,7 +42,8 @@ namespace Library
         Copy newCopy = (Copy) otherCopy;
         bool idEquality = (this.GetId() == newCopy.GetId());
         bool nameEquality = (this.GetName() == newCopy.GetName());
-        return (idEquality && nameEquality);
+        bool dueEquality = (this.GetDue() == newCopy.GetDue());
+        return (idEquality && nameEquality && dueEquality);
       }
     }
 
@@ -58,7 +64,8 @@ namespace Library
       {
         int id = rdr.GetInt32(0);
         string name = rdr.GetString(1);
-        Copy newCopy = new Copy(name, id);
+        DateTime due = rdr.GetDateTime(2);
+        Copy newCopy = new Copy(name, due, id);
         AllCopy.Add(newCopy);
       }
       if (rdr != null)
@@ -77,11 +84,13 @@ namespace Library
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO copies (name) OUTPUT INSERTED.id VALUES (@name);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO copies (name, due) OUTPUT INSERTED.id VALUES (@name, @due);", conn);
 
       SqlParameter namePara = new SqlParameter("@name", this.GetName());
+      SqlParameter duePara = new SqlParameter("@due", this.GetDue());
 
       cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(duePara);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -112,13 +121,15 @@ namespace Library
 
       int foundId = 0;
       string name = null;
+      DateTime due = new DateTime();
 
       while(rdr.Read())
       {
         foundId = rdr.GetInt32(0);
         name = rdr.GetString(1);
+        due = rdr.GetDateTime(2);
       }
-      Copy foundCopy = new Copy(name, foundId);
+      Copy foundCopy = new Copy(name, due, foundId);
       if (rdr != null)
       {
         rdr.Close();
@@ -130,21 +141,24 @@ namespace Library
       return foundCopy;
     }
     //
-    public void Update(string name)
+    public void Update(string name, DateTime due)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name WHERE id = @Id;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name WHERE id = @Id; UPDATE copies SET due = @due WHERE id = @Id;", conn);
+    //  SqlCommand cmd = new SqlCommand("UPDATE copies SET due = @due WHERE id = @Id;", conn);
 
       SqlParameter namePara = new SqlParameter("@name", name);
-
+      SqlParameter duePara = new SqlParameter("@due", due);
       SqlParameter idPara = new SqlParameter("@Id", this.GetId());
 
       cmd.Parameters.Add(namePara);
       cmd.Parameters.Add(idPara);
+      cmd.Parameters.Add(duePara);
 
       this._name = name;
+      this._due = due;
       cmd.ExecuteNonQuery();
       conn.Close();
     }
@@ -155,10 +169,10 @@ namespace Library
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT patrons.* FROM copies JOIN patrons_copies ON (copies.id = patrons_copies.copy_id) JOIN patrons ON (patrons_copies.patron_id = patrons.id) WHERE copies.id = @CopysId;", conn);
-      SqlParameter CopysIdParam = new SqlParameter("@CopysId", this.GetId().ToString());
+      SqlCommand cmd = new SqlCommand("SELECT patrons.* FROM copies JOIN patrons_copies ON (copies.id = patrons_copies.copy_id) JOIN patrons ON (patrons_copies.patron_id = patrons.id) WHERE copies.id = @copiesId;", conn);
+      SqlParameter copiesIdParam = new SqlParameter("@copiesId", this.GetId().ToString());
 
-      cmd.Parameters.Add(CopysIdParam);
+      cmd.Parameters.Add(copiesIdParam);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
