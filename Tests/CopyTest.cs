@@ -78,43 +78,44 @@ namespace Library
       Assert.Equal(inStock, result);
     }
 
+//these methods utilize our join tables, and so we have to build our patron object first.
 
     // [Fact]
-    // public void GetAuthors_ReturnsAllCopyAuthors_AuthorList()
+    // public void GetPatrons_ReturnsAllCopyPatrons_PatronList()
     // {
     //   //Arrange
-    //   Copy testCopy = new Copy("The C Programming Language", "Reference Copy", new DateTime(2018, 03, 16));
+    //   Copy testCopy = new Copy("The C Programming Language", 12, 25);
     //   testCopy.Save();
     //
-    //   Author testAuthors1 = new Author("Biran W. Kernighan");
-    //   testAuthors1.Save();
+    //   Patron testPatrons1 = new Patron("B-r0n Whitwicky");
+    //   testPatrons1.Save();
     //
-    //   Author testAuthors2 = new Author("Dennis M. Ritchie");
-    //   testAuthors2.Save();
+    //   Patron testPatrons2 = new Patron("Mitch Mitchell");
+    //   testPatrons2.Save();
     //
     //   //Act
-    //   testCopy.AddAuthor(testAuthors1);
-    //   List<Author> result = testCopy.GetAuthors();
-    //   List<Author> testList = new List<Author> {testAuthors1};
+    //   testCopy.AddPatron(testPatrons1);
+    //   List<Patron> result = testCopy.GetPatrons();
+    //   List<Patron> testList = new List<Patron> {testPatrons1};
     //
     //   //Assert
     //   Assert.Equal(testList, result);
     // }
     // [Fact]
-    // public void AddAuthor_AddsAuthorsToCopy_AuthorsList()
+    // public void AddPatron_AddsPatronsToCopy_PatronsList()
     // {
     //   //Arrange
-    //   Copy testCopy = new Copy("The Go Programming Language", "Reference", new DateTime(2016, 10, 27));
+    //   Copy testCopy = new Copy("The Go Programming Language", 34, 1);
     //   testCopy.Save();
     //
-    //   Author testAuthors = new Author("Alan A. A. Donvoan");
-    //   testAuthors.Save();
+    //   Patron testPatrons = new Patron("Alan Alda");
+    //   testPatrons.Save();
     //
     //   //Act
-    //   testCopy.AddAuthor(testAuthors);
+    //   testCopy.AddPatron(testPatrons);
     //
-    //   List<Author> result = testCopy.GetAuthors();
-    //   List<Author> testList = new List<Author>{testAuthors};
+    //   List<Patron> result = testCopy.GetPatrons();
+    //   List<Patron> testList = new List<Patron>{testPatrons};
     //
     //   //Assert
     //   Assert.Equal(testList, result);
@@ -124,21 +125,21 @@ namespace Library
     // public void Delete_DeletesCopysAssociationsFromDatabase_CopysList()
     // {
     //   //Arrange
-    //   Author testAuthor = new Author("Stephen King");
-    //   testAuthor.Save();
+    //   Patron testPatron = new Patron("Stephen King");
+    //   testPatron.Save();
     //
     //   Copy testCopys = new Copy("It", "Horror", new DateTime(2015, 09, 29));
     //   testCopys.Save();
     //
     //   //Act
-    //   testCopys.AddAuthor(testAuthor);
+    //   testCopys.AddPatron(testPatron);
     //   testCopys.Delete();
     //
-    //   List<Copy> resultAuthorCopys = testAuthor.GetCopys();
-    //   List<Copy> testAuthorCopys = new List<Copy> {};
+    //   List<Copy> resultPatronCopys = testPatron.GetCopys();
+    //   List<Copy> testPatronCopys = new List<Copy> {};
     //
     //   //Assert
-    //   Assert.Equal(testAuthorCopys, resultAuthorCopys);
+    //   Assert.Equal(testPatronCopys, resultPatronCopys);
     // }
 
     public void Dispose()

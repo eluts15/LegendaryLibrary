@@ -4,25 +4,25 @@ using System;
 
 namespace Library
 {
-  // public class Patron
-  // {
-  //   private int _id;
-  //   private string _name;
-  //
-  //   public Patron (string name, int id = 0)
-  //   {
-  //     _name = name;
-  //     _id = id;
-  //   }
-  //   public int GetId()
-  //   {
-  //     return _id;
-  //   }
-  //   public string GetName()
-  //   {
-  //     return _name;
-  //   }
-  //
+  public class Patron
+  {
+    private int _id;
+    private string _name;
+
+    public Patron (string name, int id = 0)
+    {
+      _name = name;
+      _id = id;
+    }
+    public int GetId()
+    {
+      return _id;
+    }
+    public string GetName()
+    {
+      return _name;
+    }
+
   //   public override bool Equals(System.Object otherPatron)
   //   {
   //    if(!(otherPatron is Patron))
@@ -43,56 +43,56 @@ namespace Library
   //     return this.GetName().GetHashCode();
   //   }
   //
-  //   public static List<Patron> GetAll()
-  //   {
-  //     List<Patron> AllPatron = new List<Patron>{};
+    public static List<Patron> GetAll()
+    {
+      List<Patron> AllPatron = new List<Patron>{};
+
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM patrons;", conn);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        Patron newPatron = new Patron(name, id);
+        AllPatron.Add(newPatron);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return AllPatron;
+    }
   //
+  //   public List<Copy> GetCopys()
+  //   {
   //     SqlConnection conn = DB.Connection();
   //     conn.Open();
   //
-  //     SqlCommand cmd = new SqlCommand("SELECT * FROM Patrons;", conn);
-  //     SqlDataReader rdr = cmd.ExecuteReader();
-  //
-  //     while(rdr.Read())
-  //     {
-  //       int id = rdr.GetInt32(0);
-  //       string name = rdr.GetString(1);
-  //       Patron newPatron = new Patron(name, id);
-  //       AllPatron.Add(newPatron);
-  //     }
-  //     if (rdr != null)
-  //     {
-  //       rdr.Close();
-  //     }
-  //     if (conn != null)
-  //     {
-  //       conn.Close();
-  //     }
-  //     return AllPatron;
-  //   }
-  //
-  //   public List<Book> GetBooks()
-  //   {
-  //     SqlConnection conn = DB.Connection();
-  //     conn.Open();
-  //
-  //     SqlCommand cmd = new SqlCommand("SELECT books.* FROM Patrons JOIN books_Patrons ON (Patrons.id = books_Patrons.Patron_id) JOIN books ON (books_Patrons.book_id = books.id) WHERE Patrons.id = @PatronId;", conn);
+  //     SqlCommand cmd = new SqlCommand("SELECT Copys.* FROM Patrons JOIN Copys_Patrons ON (Patrons.id = Copys_Patrons.Patron_id) JOIN Copys ON (Copys_Patrons.Copy_id = Copys.id) WHERE Patrons.id = @PatronId;", conn);
   //     SqlParameter PatronIdParam = new SqlParameter("@PatronId", this.GetId().ToString());
   //
   //     cmd.Parameters.Add(PatronIdParam);
   //
   //     SqlDataReader rdr = cmd.ExecuteReader();
   //
-  //     List<Book> books = new List<Book>{};
+  //     List<Copy> Copys = new List<Copy>{};
   //
   //     while(rdr.Read())
   //     {
-  //       int bookId = rdr.GetInt32(0);
+  //       int CopyId = rdr.GetInt32(0);
   //       string name = rdr.GetString(1);
   //       string genre = rdr.GetString(2);
   //       DateTime dueDate = rdr.GetDateTime(3);
-  //       Book newBook = new Book(name, genre, dueDate, bookId);
-  //       books.Add(newBook);
+  //       Copy newCopy = new Copy(name, genre, dueDate, CopyId);
+  //       Copys.Add(newCopy);
   //     }
   //
   //     if (rdr != null)
@@ -103,7 +103,7 @@ namespace Library
   //     {
   //       conn.Close();
   //     }
-  //     return books;
+  //     return Copys;
   //   }
   //
   //   public void Save()
@@ -180,18 +180,18 @@ namespace Library
   //     cmd.ExecuteNonQuery();
   //     conn.Close();
   //   }
-  //   //Add book's id and Patron's id to books_Patrons table
-  //   public void AddBook(Book newBook)
+  //   //Add Copy's id and Patron's id to Copys_Patrons table
+  //   public void AddCopy(Copy newCopy)
   //   {
   //     SqlConnection conn = DB.Connection();
   //     conn.Open();
   //
-  //     SqlCommand cmd = new SqlCommand("INSERT INTO books_Patrons (book_id, Patron_id) VALUES (@BookId, @PatronId);", conn);
+  //     SqlCommand cmd = new SqlCommand("INSERT INTO Copys_Patrons (Copy_id, Patron_id) VALUES (@CopyId, @PatronId);", conn);
   //
-  //     SqlParameter bookIdParameter = new SqlParameter( "@BookId", newBook.GetId());
+  //     SqlParameter CopyIdParameter = new SqlParameter( "@CopyId", newCopy.GetId());
   //     SqlParameter PatronIdParameter = new SqlParameter("@PatronId", this.GetId());
   //
-  //     cmd.Parameters.Add(bookIdParameter);
+  //     cmd.Parameters.Add(CopyIdParameter);
   //     cmd.Parameters.Add(PatronIdParameter);
   //     cmd.ExecuteNonQuery();
   //     if (conn != null)
@@ -205,7 +205,7 @@ namespace Library
   //     SqlConnection conn = DB.Connection();
   //     conn.Open();
   //
-  //     SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM books_Patrons WHERE Patron_id = @Id;", conn);
+  //     SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM Copys_Patrons WHERE Patron_id = @Id;", conn);
   //     SqlParameter IdParameter = new SqlParameter("@Id", this.GetId());
   //
   //     cmd.Parameters.Add(IdParameter);
@@ -217,13 +217,13 @@ namespace Library
   //     }
   //   }
 
-    // public static void DeleteAll()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   SqlCommand cmd = new SqlCommand("DELETE FROM Patrons;", conn);
-    //   cmd.ExecuteNonQuery();
-    //   conn.Close();
-    // }
-  // }
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM Patrons;", conn);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
+  }
 }
