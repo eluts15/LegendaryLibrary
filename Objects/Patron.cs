@@ -102,7 +102,7 @@ namespace Library
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM Patrons WHERE id = @id;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT * FROM patrons WHERE id = @id;", conn);
       SqlParameter IdPara = new SqlParameter("@id", id.ToString());
 
       cmd.Parameters.Add(IdPara);
@@ -127,78 +127,78 @@ namespace Library
       }
      return foundPatron;
     }
-  
-  //   public void Update(string name)
-  //   {
-  //     SqlConnection conn = DB.Connection();
-  //     conn.Open();
-  //
-  //     SqlCommand cmd = new SqlCommand("UPDATE Patrons SET name = @name WHERE id = @Id;", conn);
-  //
-  //     SqlParameter namePara = new SqlParameter("@name", name);
-  //     SqlParameter idPara = new SqlParameter("@Id", this.GetId());
-  //
-  //     cmd.Parameters.Add(namePara);
-  //     cmd.Parameters.Add(idPara);
-  //
-  //     this._name = name;
-  //     cmd.ExecuteNonQuery();
-  //     conn.Close();
-  //   }
-  //   //Add Copy's id and Patron's id to Copies_Patrons table
 
-  //   public List<Copy> GetCopies()
-  //   {
-  //     SqlConnection conn = DB.Connection();
-  //     conn.Open();
-  //
-  //     SqlCommand cmd = new SqlCommand("SELECT Copies.* FROM Patrons JOIN Copies_Patrons ON (Patrons.id = Copies_Patrons.Patron_id) JOIN Copies ON (Copies_Patrons.Copy_id = Copies.id) WHERE Patrons.id = @PatronId;", conn);
-  //     SqlParameter PatronIdParam = new SqlParameter("@PatronId", this.GetId().ToString());
-  //
-  //     cmd.Parameters.Add(PatronIdParam);
-  //
-  //     SqlDataReader rdr = cmd.ExecuteReader();
-  //
-  //     List<Copy> Copies = new List<Copy>{};
-  //
-  //     while(rdr.Read())
-  //     {
-  //       int CopyId = rdr.GetInt32(0);
-  //       string name = rdr.GetString(1);
-  //       string genre = rdr.GetString(2);
-  //       DateTime dueDate = rdr.GetDateTime(3);
-  //       Copy newCopy = new Copy(name, genre, dueDate, CopyId);
-  //       Copies.Add(newCopy);
-  //     }
-  //
-  //     if (rdr != null)
-  //     {
-  //       rdr.Close();
-  //     }
-  //     if (conn != null)
-  //     {
-  //       conn.Close();
-  //     }
-  //     return Copies;
-  //   }
-  //   public void AddCopy(Copy newCopy)
-  //   {
-  //     SqlConnection conn = DB.Connection();
-  //     conn.Open();
-  //
-  //     SqlCommand cmd = new SqlCommand("INSERT INTO Copies_Patrons (Copy_id, Patron_id) VALUES (@CopyId, @PatronId);", conn);
-  //
-  //     SqlParameter CopyIdParameter = new SqlParameter( "@CopyId", newCopy.GetId());
-  //     SqlParameter PatronIdParameter = new SqlParameter("@PatronId", this.GetId());
-  //
-  //     cmd.Parameters.Add(CopyIdParameter);
-  //     cmd.Parameters.Add(PatronIdParameter);
-  //     cmd.ExecuteNonQuery();
-  //     if (conn != null)
-  //     {
-  //       conn.Close();
-  //     }
-  //   }
+    public void Update(string name)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE patrons SET name = @name WHERE id = @Id;", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", name);
+      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(idPara);
+
+      this._name = name;
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
+    //Add Copy's id and Patron's id to Copies_Patrons table
+
+    // public List<Copy> GetCopies()
+    // {
+    //   SqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //
+    //   SqlCommand cmd = new SqlCommand("SELECT Copies.* FROM patrons JOIN Copies_Patrons ON (Patrons.id = Copies_Patrons.Patron_id) JOIN Copies ON (Copies_Patrons.Copy_id = Copies.id) WHERE Patrons.id = @PatronId;", conn);
+    //   SqlParameter PatronIdParam = new SqlParameter("@PatronId", this.GetId().ToString());
+    //
+    //   cmd.Parameters.Add(PatronIdParam);
+    //
+    //   SqlDataReader rdr = cmd.ExecuteReader();
+    //
+    //   List<Copy> Copies = new List<Copy>{};
+    //
+    //   while(rdr.Read())
+    //   {
+    //     int CopyId = rdr.GetInt32(0);
+    //     string name = rdr.GetString(1);
+    //     string genre = rdr.GetString(2);
+    //     DateTime dueDate = rdr.GetDateTime(3);
+    //     Copy newCopy = new Copy(name, genre, dueDate, CopyId);
+    //     Copies.Add(newCopy);
+    //   }
+    //
+    //   if (rdr != null)
+    //   {
+    //     rdr.Close();
+    //   }
+    //   if (conn != null)
+    //   {
+    //     conn.Close();
+    //   }
+    //   return Copies;
+    // }
+    // public void AddCopy(Copy newCopy)
+    // {
+    //   SqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //
+    //   SqlCommand cmd = new SqlCommand("INSERT INTO Copies_Patrons (Copy_id, Patron_id) VALUES (@CopyId, @PatronId);", conn);
+    //
+    //   SqlParameter CopyIdParameter = new SqlParameter( "@CopyId", newCopy.GetId());
+    //   SqlParameter PatronIdParameter = new SqlParameter("@PatronId", this.GetId());
+    //
+    //   cmd.Parameters.Add(CopyIdParameter);
+    //   cmd.Parameters.Add(PatronIdParameter);
+    //   cmd.ExecuteNonQuery();
+    //   if (conn != null)
+    //   {
+    //     conn.Close();
+    //   }
+    // }
   //
   //   public void Delete()
   //   {

@@ -61,21 +61,21 @@ namespace Library
       Assert.Equal(testPatron, foundPatron);
     }
 
-    // [Fact]
-    // public void Test_Update_UpdatesPatronInDatabase()
-    // {
-    //   //Arrange
-    //   Patron testPatron = new Patron("John Steinbeck");
-    //   testPatron.Save();
-    //   string newName = "Steven Steinbeck";
-    //   //Act
-    //   testPatron.Update(newName);
-    //   string result = testPatron.GetName();
-    //
-    //   //Assert
-    //   Assert.Equal(newName, result);
-    // }
-    //
+    [Fact]
+    public void Test_Update_UpdatesPatronInDatabase()
+    {
+      //Arrange
+      Patron testPatron = new Patron("Prince");
+      testPatron.Save();
+      string newName = "The Artist Formerly Known As Prince";
+      //Act
+      testPatron.Update(newName);
+      string result = testPatron.GetName();
+
+      //Assert
+      Assert.Equal(newName, result);
+    }
+
     // [Fact]
     // public void GetBooks_ReturnsAllPatronBook_BookList()
     // {
