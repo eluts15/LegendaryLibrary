@@ -200,23 +200,23 @@ namespace Library
         conn.Close();
       }
     }
-  //
-  //   public void Delete()
-  //   {
-  //     SqlConnection conn = DB.Connection();
-  //     conn.Open();
-  //
-  //     SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM patrons_copies WHERE Patron_id = @Id;", conn);
-  //     SqlParameter IdParameter = new SqlParameter("@Id", this.GetId());
-  //
-  //     cmd.Parameters.Add(IdParameter);
-  //     cmd.ExecuteNonQuery();
-  //
-  //     if (conn != null)
-  //     {
-  //       conn.Close();
-  //     }
-  //   }
+
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM patrons_copies WHERE Patron_id = @Id;", conn);
+      SqlParameter IdParameter = new SqlParameter("@Id", this.GetId());
+
+      cmd.Parameters.Add(IdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
 
     public static void DeleteAll()
     {

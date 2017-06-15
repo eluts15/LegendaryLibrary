@@ -120,27 +120,27 @@ namespace Library
       //Assert
       Assert.Equal(testList, result);
     }
-    //
-    // [Fact]
-    // public void Delete_DeletesPatronAssociationsFromDatabase_PatronList()
-    // {
-    //   //Arrange
-    //   Copy testCopy = new Copy("The Unbearable Lightness of Being", "Realistic Fiction", new DateTime(2014, 04, 02));
-    //   testCopy.Save();
-    //
-    //   Patron testPatron = new Patron("Milan Kundera");
-    //   testPatron.Save();
-    //
-    //   //Act
-    //   testPatron.AddCopy(testCopy);
-    //   testPatron.Delete();
-    //
-    //   List<Patron> resultCopyPatron = testCopy.GetPatrons();
-    //   List<Patron> testCopyPatron = new List<Patron> {};
-    //
-    //   //Assert
-    //   Assert.Equal(testCopyPatron, resultCopyPatron);
-    // }
+
+    [Fact]
+    public void Delete_DeletesPatronAssociationsFromDatabase_PatronList()
+    {
+      //Arrange
+      Copy testCopy = new Copy("The Unbearable Lightness of Being", 4, 2);
+      testCopy.Save();
+
+      Patron testPatron = new Patron("Dan Rather");
+      testPatron.Save();
+
+      //Act
+      testPatron.AddCopy(testCopy);
+      testPatron.Delete();
+
+      List<Patron> resultCopyPatron = testCopy.GetPatrons();
+      List<Patron> testCopyPatron = new List<Patron> {};
+
+      //Assert
+      Assert.Equal(testCopyPatron, resultCopyPatron);
+    }
 
 
     public void Dispose()
