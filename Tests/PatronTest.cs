@@ -49,18 +49,18 @@ namespace Library
       Assert.Equal(testList, result);
     }
 
-    // [Fact]
-    // public void Test_Find_FindsPatronInDatabase()
-    // {
-    //   //Arrange
-    //   Patron testPatron = new Patron("G.R.R. Martin");
-    //   testPatron.Save();
-    //   //Act
-    //   Patron foundPatron = Patron.Find(testPatron.GetId());
-    //   //Assert
-    //   Assert.Equal(testPatron, foundPatron);
-    // }
-    //
+    [Fact]
+    public void Test_Find_FindsPatronInDatabase()
+    {
+      //Arrange
+      Patron testPatron = new Patron("Nicholas Wise");
+      testPatron.Save();
+      //Act
+      Patron foundPatron = Patron.Find(testPatron.GetId());
+      //Assert
+      Assert.Equal(testPatron, foundPatron);
+    }
+
     // [Fact]
     // public void Test_Update_UpdatesPatronInDatabase()
     // {

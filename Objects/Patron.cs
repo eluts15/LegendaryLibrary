@@ -97,37 +97,37 @@ namespace Library
       }
     }
 
-  //   public static Patron Find(int id)
-  //   {
-  //     SqlConnection conn = DB.Connection();
-  //     conn.Open();
-  //
-  //     SqlCommand cmd = new SqlCommand("SELECT * FROM Patrons WHERE id = @id;", conn);
-  //     SqlParameter IdPara = new SqlParameter("@id", id.ToString());
-  //
-  //     cmd.Parameters.Add(IdPara);
-  //     SqlDataReader rdr = cmd.ExecuteReader();
-  //
-  //     int foundId = 0;
-  //     string name = null;
-  //
-  //     while(rdr.Read())
-  //     {
-  //       foundId = rdr.GetInt32(0);
-  //       name = rdr.GetString(1);
-  //     }
-  //     Patron foundPatron = new Patron(name, foundId);
-  //     if (rdr != null)
-  //     {
-  //      rdr.Close();
-  //     }
-  //     if (conn != null)
-  //     {
-  //      conn.Close();
-  //     }
-  //    return foundPatron;
-  //   }
-  //
+    public static Patron Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM Patrons WHERE id = @id;", conn);
+      SqlParameter IdPara = new SqlParameter("@id", id.ToString());
+
+      cmd.Parameters.Add(IdPara);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string name = null;
+
+      while(rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        name = rdr.GetString(1);
+      }
+      Patron foundPatron = new Patron(name, foundId);
+      if (rdr != null)
+      {
+       rdr.Close();
+      }
+      if (conn != null)
+      {
+       conn.Close();
+      }
+     return foundPatron;
+    }
+  
   //   public void Update(string name)
   //   {
   //     SqlConnection conn = DB.Connection();
