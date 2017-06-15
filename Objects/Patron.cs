@@ -42,7 +42,7 @@ namespace Library
     {
       return this.GetName().GetHashCode();
     }
-  
+
     public static List<Patron> GetAll()
     {
       List<Patron> AllPatron = new List<Patron>{};
@@ -70,68 +70,33 @@ namespace Library
       }
       return AllPatron;
     }
-  //
-  //   public List<Copy> GetCopys()
-  //   {
-  //     SqlConnection conn = DB.Connection();
-  //     conn.Open();
-  //
-  //     SqlCommand cmd = new SqlCommand("SELECT Copys.* FROM Patrons JOIN Copys_Patrons ON (Patrons.id = Copys_Patrons.Patron_id) JOIN Copys ON (Copys_Patrons.Copy_id = Copys.id) WHERE Patrons.id = @PatronId;", conn);
-  //     SqlParameter PatronIdParam = new SqlParameter("@PatronId", this.GetId().ToString());
-  //
-  //     cmd.Parameters.Add(PatronIdParam);
-  //
-  //     SqlDataReader rdr = cmd.ExecuteReader();
-  //
-  //     List<Copy> Copys = new List<Copy>{};
-  //
-  //     while(rdr.Read())
-  //     {
-  //       int CopyId = rdr.GetInt32(0);
-  //       string name = rdr.GetString(1);
-  //       string genre = rdr.GetString(2);
-  //       DateTime dueDate = rdr.GetDateTime(3);
-  //       Copy newCopy = new Copy(name, genre, dueDate, CopyId);
-  //       Copys.Add(newCopy);
-  //     }
-  //
-  //     if (rdr != null)
-  //     {
-  //       rdr.Close();
-  //     }
-  //     if (conn != null)
-  //     {
-  //       conn.Close();
-  //     }
-  //     return Copys;
-  //   }
-  //
-  //   public void Save()
-  //   {
-  //    SqlConnection conn = DB.Connection();
-  //    conn.Open();
-  //
-  //    SqlCommand cmd = new SqlCommand("INSERT INTO Patrons (name) OUTPUT INSERTED.id VALUES (@name);", conn);
-  //
-  //    SqlParameter namePara = new SqlParameter("@name", this.GetName());
-  //
-  //    cmd.Parameters.Add(namePara);
-  //    SqlDataReader rdr = cmd.ExecuteReader();
-  //
-  //    while(rdr.Read())
-  //    {
-  //      this._id = rdr.GetInt32(0);
-  //    }
-  //    if (rdr != null)
-  //    {
-  //      rdr.Close();
-  //    }
-  //    if (conn != null)
-  //    {
-  //      conn.Close();
-  //    }
-  //   }
-  //
+
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO patrons (name) OUTPUT INSERTED.id VALUES (@name);", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", this.GetName());
+
+      cmd.Parameters.Add(namePara);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+       this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+       rdr.Close();
+      }
+      if (conn != null)
+      {
+       conn.Close();
+      }
+    }
+
   //   public static Patron Find(int id)
   //   {
   //     SqlConnection conn = DB.Connection();
@@ -180,13 +145,48 @@ namespace Library
   //     cmd.ExecuteNonQuery();
   //     conn.Close();
   //   }
-  //   //Add Copy's id and Patron's id to Copys_Patrons table
+  //   //Add Copy's id and Patron's id to Copies_Patrons table
+
+  //   public List<Copy> GetCopies()
+  //   {
+  //     SqlConnection conn = DB.Connection();
+  //     conn.Open();
+  //
+  //     SqlCommand cmd = new SqlCommand("SELECT Copies.* FROM Patrons JOIN Copies_Patrons ON (Patrons.id = Copies_Patrons.Patron_id) JOIN Copies ON (Copies_Patrons.Copy_id = Copies.id) WHERE Patrons.id = @PatronId;", conn);
+  //     SqlParameter PatronIdParam = new SqlParameter("@PatronId", this.GetId().ToString());
+  //
+  //     cmd.Parameters.Add(PatronIdParam);
+  //
+  //     SqlDataReader rdr = cmd.ExecuteReader();
+  //
+  //     List<Copy> Copies = new List<Copy>{};
+  //
+  //     while(rdr.Read())
+  //     {
+  //       int CopyId = rdr.GetInt32(0);
+  //       string name = rdr.GetString(1);
+  //       string genre = rdr.GetString(2);
+  //       DateTime dueDate = rdr.GetDateTime(3);
+  //       Copy newCopy = new Copy(name, genre, dueDate, CopyId);
+  //       Copies.Add(newCopy);
+  //     }
+  //
+  //     if (rdr != null)
+  //     {
+  //       rdr.Close();
+  //     }
+  //     if (conn != null)
+  //     {
+  //       conn.Close();
+  //     }
+  //     return Copies;
+  //   }
   //   public void AddCopy(Copy newCopy)
   //   {
   //     SqlConnection conn = DB.Connection();
   //     conn.Open();
   //
-  //     SqlCommand cmd = new SqlCommand("INSERT INTO Copys_Patrons (Copy_id, Patron_id) VALUES (@CopyId, @PatronId);", conn);
+  //     SqlCommand cmd = new SqlCommand("INSERT INTO Copies_Patrons (Copy_id, Patron_id) VALUES (@CopyId, @PatronId);", conn);
   //
   //     SqlParameter CopyIdParameter = new SqlParameter( "@CopyId", newCopy.GetId());
   //     SqlParameter PatronIdParameter = new SqlParameter("@PatronId", this.GetId());
@@ -205,7 +205,7 @@ namespace Library
   //     SqlConnection conn = DB.Connection();
   //     conn.Open();
   //
-  //     SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM Copys_Patrons WHERE Patron_id = @Id;", conn);
+  //     SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM Copies_Patrons WHERE Patron_id = @Id;", conn);
   //     SqlParameter IdParameter = new SqlParameter("@Id", this.GetId());
   //
   //     cmd.Parameters.Add(IdParameter);

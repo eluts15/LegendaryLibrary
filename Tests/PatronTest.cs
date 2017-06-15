@@ -34,21 +34,21 @@ namespace Library
       Assert.Equal(Patron1, Patron2);
     }
 
-    // [Fact]
-    // public void Test_Save_SavePatronToDatabase()
-    // {
-    //   //Arrange
-    //   Patron testPatron = new Patron("J.R.R. Tolkien");
-    //   testPatron.Save();
-    //
-    //   //Act
-    //   List<Patron> result = Patron.GetAll();
-    //   List<Patron> testList = new List<Patron>{testPatron};
-    //
-    //   //Assert
-    //   Assert.Equal(testList, result);
-    // }
-    //
+    [Fact]
+    public void Test_Save_SavePatronToDatabase()
+    {
+      //Arrange
+      Patron testPatron = new Patron("Ethan Luts");
+      testPatron.Save();
+
+      //Act
+      List<Patron> result = Patron.GetAll();
+      List<Patron> testList = new List<Patron>{testPatron};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
     // [Fact]
     // public void Test_Find_FindsPatronInDatabase()
     // {
@@ -149,7 +149,7 @@ namespace Library
       Book.DeleteAll();
       Author.DeleteAll();
       Copy.DeleteAll();
-      // Patron.DeleteAll();
+      Patron.DeleteAll();
     }
   }
 }

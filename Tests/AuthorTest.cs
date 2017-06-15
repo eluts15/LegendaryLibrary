@@ -149,7 +149,7 @@ namespace Library
       Book.DeleteAll();
       Author.DeleteAll();
       Copy.DeleteAll();
-      // Patron.DeleteAll();
+      Patron.DeleteAll();
     }
   }
 }
