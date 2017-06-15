@@ -120,22 +120,22 @@ namespace Library
       //Assert
       Assert.Equal(testList, result);
     }
-    //
+
     // [Fact]
     // public void Delete_DeletesCopysAssociationsFromDatabase_CopysList()
     // {
     //   //Arrange
-    //   Patron testPatron = new Patron("Stephen King");
+    //   Patron testPatron = new Patron("Kevin Bevins");
     //   testPatron.Save();
     //
-    //   Copy testCopys = new Copy("It", "Horror", new DateTime(2015, 09, 29));
+    //   Copy testCopys = new Copy("It", 5, 3);
     //   testCopys.Save();
     //
     //   //Act
     //   testCopys.AddPatron(testPatron);
     //   testCopys.Delete();
     //
-    //   List<Copy> resultPatronCopys = testPatron.GetCopys();
+    //   List<Copy> resultPatronCopys = testPatron.GetCopies();
     //   List<Copy> testPatronCopys = new List<Copy> {};
     //
     //   //Assert

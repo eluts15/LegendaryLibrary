@@ -184,9 +184,7 @@ namespace Library
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("SELECT authors.* FROM books JOIN books_authors ON (books.id = books_authors.book_id) JOIN authors ON (books_authors.author_id = authors.id) WHERE books.id = @BooksId;", conn);
-      SqlParameter BooksIdParam = new SqlParameter();
-      BooksIdParam.ParameterName = "@BooksId";
-      BooksIdParam.Value = this.GetId().ToString();
+      SqlParameter BooksIdParam = new SqlParameter("@BooksId", this.GetId().ToString());
 
       cmd.Parameters.Add(BooksIdParam);
 

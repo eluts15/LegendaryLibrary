@@ -145,67 +145,68 @@ namespace Library
       cmd.ExecuteNonQuery();
       conn.Close();
     }
-    //Add Copy's id and Patron's id to Copies_Patrons table
 
-    // public List<Copy> GetCopies()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT Copies.* FROM patrons JOIN Copies_Patrons ON (Patrons.id = Copies_Patrons.Patron_id) JOIN Copies ON (Copies_Patrons.Copy_id = Copies.id) WHERE Patrons.id = @PatronId;", conn);
-    //   SqlParameter PatronIdParam = new SqlParameter("@PatronId", this.GetId().ToString());
-    //
-    //   cmd.Parameters.Add(PatronIdParam);
-    //
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   List<Copy> Copies = new List<Copy>{};
-    //
-    //   while(rdr.Read())
-    //   {
-    //     int CopyId = rdr.GetInt32(0);
-    //     string name = rdr.GetString(1);
-    //     string genre = rdr.GetString(2);
-    //     DateTime dueDate = rdr.GetDateTime(3);
-    //     Copy newCopy = new Copy(name, genre, dueDate, CopyId);
-    //     Copies.Add(newCopy);
-    //   }
-    //
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    //   return Copies;
-    // }
-    // public void AddCopy(Copy newCopy)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("INSERT INTO Copies_Patrons (Copy_id, Patron_id) VALUES (@CopyId, @PatronId);", conn);
-    //
-    //   SqlParameter CopyIdParameter = new SqlParameter( "@CopyId", newCopy.GetId());
-    //   SqlParameter PatronIdParameter = new SqlParameter("@PatronId", this.GetId());
-    //
-    //   cmd.Parameters.Add(CopyIdParameter);
-    //   cmd.Parameters.Add(PatronIdParameter);
-    //   cmd.ExecuteNonQuery();
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
+    public List<Copy> GetCopies()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT copies.* FROM patrons JOIN patrons_copies ON (patrons.id = patrons_copies.patron_id) JOIN copies ON (patrons_copies.copy_id = copies.id) WHERE patrons.id = @PatronId;", conn);
+      SqlParameter patronIdParam = new SqlParameter("@PatronId", this.GetId().ToString());
+
+      cmd.Parameters.Add(patronIdParam);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Copy> Copies = new List<Copy>{};
+
+      while(rdr.Read())
+      {
+        int copyId = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        int inStock = rdr.GetInt32(2);
+        int checkedOut = rdr.GetInt32(3);
+        Copy newCopy = new Copy(name, inStock, checkedOut, copyId);
+        Copies.Add(newCopy);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return Copies;
+    }
+
+    //Add Copy's id and Patron's id to patrons_copies table
+    public void AddCopy(Copy newCopy)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO patrons_copies (patron_id, copy_id) VALUES (@PatronId, @CopyId);", conn);
+
+      SqlParameter copyIdParameter = new SqlParameter( "@CopyId", newCopy.GetId());
+      SqlParameter patronIdParameter = new SqlParameter("@PatronId", this.GetId());
+
+      cmd.Parameters.Add(copyIdParameter);
+      cmd.Parameters.Add(patronIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
   //
   //   public void Delete()
   //   {
   //     SqlConnection conn = DB.Connection();
   //     conn.Open();
   //
-  //     SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM Copies_Patrons WHERE Patron_id = @Id;", conn);
+  //     SqlCommand cmd = new SqlCommand("DELETE FROM Patrons WHERE id = @Id; DELETE FROM patrons_copies WHERE Patron_id = @Id;", conn);
   //     SqlParameter IdParameter = new SqlParameter("@Id", this.GetId());
   //
   //     cmd.Parameters.Add(IdParameter);

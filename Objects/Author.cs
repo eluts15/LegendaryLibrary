@@ -71,40 +71,6 @@ namespace Library
       return AllAuthor;
     }
 
-    public List<Book> GetBooks()
-    {
-      SqlConnection conn = DB.Connection();
-      conn.Open();
-
-      SqlCommand cmd = new SqlCommand("SELECT books.* FROM authors JOIN books_authors ON (authors.id = books_authors.author_id) JOIN books ON (books_authors.book_id = books.id) WHERE authors.id = @authorId;", conn);
-      SqlParameter AuthorIdParam = new SqlParameter("@authorId", this.GetId().ToString());
-
-      cmd.Parameters.Add(AuthorIdParam);
-
-      SqlDataReader rdr = cmd.ExecuteReader();
-
-      List<Book> books = new List<Book>{};
-
-      while(rdr.Read())
-      {
-        int bookId = rdr.GetInt32(0);
-        string name = rdr.GetString(1);
-        string genre = rdr.GetString(2);
-        DateTime dueDate = rdr.GetDateTime(3);
-        Book newBook = new Book(name, genre, dueDate, bookId);
-        books.Add(newBook);
-      }
-
-      if (rdr != null)
-      {
-        rdr.Close();
-      }
-      if (conn != null)
-      {
-        conn.Close();
-      }
-      return books;
-    }
 
     public void Save()
     {
@@ -180,6 +146,42 @@ namespace Library
       cmd.ExecuteNonQuery();
       conn.Close();
     }
+
+    public List<Book> GetBooks()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT books.* FROM authors JOIN books_authors ON (authors.id = books_authors.author_id) JOIN books ON (books_authors.book_id = books.id) WHERE authors.id = @authorId;", conn);
+      SqlParameter authorIdParam = new SqlParameter("@authorId", this.GetId().ToString());
+
+      cmd.Parameters.Add(authorIdParam);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Book> books = new List<Book>{};
+
+      while(rdr.Read())
+      {
+        int bookId = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        string genre = rdr.GetString(2);
+        DateTime dueDate = rdr.GetDateTime(3);
+        Book newBook = new Book(name, genre, dueDate, bookId);
+        books.Add(newBook);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return books;
+    }
+
     //Add book's id and author's id to books_authors table
     public void AddBook(Book newBook)
     {

@@ -76,77 +76,76 @@ namespace Library
       Assert.Equal(newName, result);
     }
 
-    // [Fact]
-    // public void GetBooks_ReturnsAllPatronBook_BookList()
-    // {
-    //  //Arrange
-    //  Patron testPatron = new Patron("Ursula K. Le Guin");
-    //  testPatron.Save();
-    //
-    //  Book testBook1 = new Book("A Wrinkle In Time", "Fantasy", new DateTime(2019, 08, 15));
-    //  testBook1.Save();
-    //
-    //  Book testBook2 = new Book("A Wizard of EarthSea", "Fantasy", new DateTime(2014, 09, 05));
-    //  testBook2.Save();
-    //
-    //  //Act
-    //  testPatron.AddBook(testBook1);
-    //  List<Book> savedBook = testPatron.GetBooks();
-    //  List<Book> testList = new List<Book> {testBook1};
-    //
-    //  //Assert
-    //  Assert.Equal(testList, savedBook);
-    // }
-    //
-    // [Fact]
-    // public void Test_AddBook_AddsBookToPatron()
-    // {
-    //   //Arrange
-    //   Patron testPatron = new Patron("Kurt Vonnegut, Jr.");
-    //   testPatron.Save();
-    //
-    //   Book testBook = new Book("Slaughterhouse Five", "Fiction", new DateTime(2017, 05, 09));
-    //   testBook.Save();
-    //
-    //   Book testBook2 = new Book("Breakfast of Champions", "Fiction", new DateTime(2017, 07, 02));
-    //   testBook2.Save();
-    //
-    //   //Act
-    //   testPatron.AddBook(testBook);
-    //   testPatron.AddBook(testBook2);
-    //
-    //   List<Book> result = testPatron.GetBooks();
-    //   List<Book> testList = new List<Book>{testBook, testBook2};
-    //
-    //   //Assert
-    //   Assert.Equal(testList, result);
-    // }
-    //
+    [Fact]
+    public void GetCopies_ReturnsAllPatronCopy_CopyList()
+    {
+     //Arrange
+     Patron testPatron = new Patron("Charles McMahon");
+     testPatron.Save();
+
+     Copy testCopy1 = new Copy("A Wrinkle In Time", 4, 5);
+     testCopy1.Save();
+
+     Copy testCopy2 = new Copy("A Wizard of EarthSea", 1, 6);
+     testCopy2.Save();
+
+     //Act
+     testPatron.AddCopy(testCopy1);
+     List<Copy> savedCopy = testPatron.GetCopies();
+     List<Copy> testList = new List<Copy> {testCopy1};
+
+     //Assert
+     Assert.Equal(testList, savedCopy);
+    }
+
+    [Fact]
+    public void Test_AddCopy_AddsCopyToPatron()
+    {
+      //Arrange
+      Patron testPatron = new Patron("George Beasely");
+      testPatron.Save();
+
+      Copy testCopy = new Copy("Slaughterhouse Five", 7, 2);
+      testCopy.Save();
+
+      Copy testCopy2 = new Copy("Breakfast of Champions", 3, 5);
+      testCopy2.Save();
+
+      //Act
+      testPatron.AddCopy(testCopy);
+      testPatron.AddCopy(testCopy2);
+      List<Copy> result = testPatron.GetCopies();
+      List<Copy> testList = new List<Copy>{testCopy, testCopy2};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
     // [Fact]
     // public void Delete_DeletesPatronAssociationsFromDatabase_PatronList()
     // {
     //   //Arrange
-    //   Book testBook = new Book("The Unbearable Lightness of Being", "Realistic Fiction", new DateTime(2014, 04, 02));
-    //   testBook.Save();
+    //   Copy testCopy = new Copy("The Unbearable Lightness of Being", "Realistic Fiction", new DateTime(2014, 04, 02));
+    //   testCopy.Save();
     //
     //   Patron testPatron = new Patron("Milan Kundera");
     //   testPatron.Save();
     //
     //   //Act
-    //   testPatron.AddBook(testBook);
+    //   testPatron.AddCopy(testCopy);
     //   testPatron.Delete();
     //
-    //   List<Patron> resultBookPatron = testBook.GetPatrons();
-    //   List<Patron> testBookPatron = new List<Patron> {};
+    //   List<Patron> resultCopyPatron = testCopy.GetPatrons();
+    //   List<Patron> testCopyPatron = new List<Patron> {};
     //
     //   //Assert
-    //   Assert.Equal(testBookPatron, resultBookPatron);
+    //   Assert.Equal(testCopyPatron, resultCopyPatron);
     // }
 
 
     public void Dispose()
     {
-      Book.DeleteAll();
+      Copy.DeleteAll();
       Author.DeleteAll();
       Copy.DeleteAll();
       Patron.DeleteAll();

@@ -184,9 +184,7 @@ namespace Library
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("SELECT patrons.* FROM copies JOIN patrons_copies ON (copies.id = patrons_copies.copy_id) JOIN patrons ON (patrons_copies.patron_id = patrons.id) WHERE copies.id = @CopysId;", conn);
-      SqlParameter CopysIdParam = new SqlParameter();
-      CopysIdParam.ParameterName = "@CopysId";
-      CopysIdParam.Value = this.GetId().ToString();
+      SqlParameter CopysIdParam = new SqlParameter("@CopysId", this.GetId().ToString());
 
       cmd.Parameters.Add(CopysIdParam);
 
@@ -218,7 +216,7 @@ namespace Library
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO patrons_copies (copy_id, patron_id) VALUES (@CopyId, @PatronId);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO patrons_copies (patron_id, copy_id) VALUES (@PatronId, @CopyId);", conn);
 
       SqlParameter copyIdParameter = new SqlParameter("@CopyId", this.GetId());
       SqlParameter patronIdParameter = new SqlParameter( "@PatronId", newPatron.GetId());
