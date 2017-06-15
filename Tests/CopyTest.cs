@@ -121,26 +121,26 @@ namespace Library
       Assert.Equal(testList, result);
     }
 
-    // [Fact]
-    // public void Delete_DeletesCopysAssociationsFromDatabase_CopysList()
-    // {
-    //   //Arrange
-    //   Patron testPatron = new Patron("Kevin Bevins");
-    //   testPatron.Save();
-    //
-    //   Copy testCopys = new Copy("It", 5, 3);
-    //   testCopys.Save();
-    //
-    //   //Act
-    //   testCopys.AddPatron(testPatron);
-    //   testCopys.Delete();
-    //
-    //   List<Copy> resultPatronCopys = testPatron.GetCopies();
-    //   List<Copy> testPatronCopys = new List<Copy> {};
-    //
-    //   //Assert
-    //   Assert.Equal(testPatronCopys, resultPatronCopys);
-    // }
+    [Fact]
+    public void Delete_DeletesCopysAssociationsFromDatabase_CopysList()
+    {
+      //Arrange
+      Patron testPatron = new Patron("Kevin Bevins");
+      testPatron.Save();
+
+      Copy testCopys = new Copy("It", 5, 3);
+      testCopys.Save();
+
+      //Act
+      testCopys.AddPatron(testPatron);
+      testCopys.Delete();
+
+      List<Copy> resultPatronCopys = testPatron.GetCopies();
+      List<Copy> testPatronCopys = new List<Copy> {};
+
+      //Assert
+      Assert.Equal(testPatronCopys, resultPatronCopys);
+    }
 
     public void Dispose()
     {
