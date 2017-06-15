@@ -24,16 +24,16 @@ namespace Library
      Assert.Equal(0, result);
     }
 
-    // [Fact]
-    // public void Test_Override_ObjectsAreEqual()
-    // {
-    //   //Arrange, Act
-    //   Copy Copy1 = new Copy("Moby Dick'd", "required reading", new DateTime(1851, 11, 14));
-    //   Copy Copy2 = new Copy("Moby Dick'd", "required reading", new DateTime(1851, 11, 14));
-    //   //Assert
-    //   Assert.Equal(Copy1, Copy2);
-    // }
-    //
+    [Fact]
+    public void Test_Override_ObjectsAreEqual()
+    {
+      //Arrange, Act
+      Copy Copy1 = new Copy("Moby Dick'd", 4, 3);
+      Copy Copy2 = new Copy("Moby Dick'd", 4, 3);
+      //Assert
+      Assert.Equal(Copy1, Copy2);
+    }
+
     // [Fact]
     // public void Test_Save_SavesToDatabase()
     // {

@@ -37,27 +37,27 @@ namespace Library
       return _checkedOut;
     }
 
-    // public override bool Equals(System.Object otherCopy)
-    // {
-    //   if(!(otherCopy is Copy))
-    //   {
-    //     return false;
-    //   }
-    //   else
-    //   {
-    //     Copy newCopy = (Copy) otherCopy;
-    //     bool idEquality = (this.GetId() == newCopy.GetId());
-    //     bool nameEquality = (this.GetName() == newCopy.GetName());
-    //     bool inStockEquality = (this.GetInStock() == newCopy.GetInStock());
-    //     bool checkedOutEquality = (this.GetCheckedOut() == newCopy.GetCheckedOut());
-    //     return (idEquality && nameEquality && inStockEquality && checkedOutEquality);
-    //   }
-    // }
+    public override bool Equals(System.Object otherCopy)
+    {
+      if(!(otherCopy is Copy))
+      {
+        return false;
+      }
+      else
+      {
+        Copy newCopy = (Copy) otherCopy;
+        bool idEquality = (this.GetId() == newCopy.GetId());
+        bool nameEquality = (this.GetName() == newCopy.GetName());
+        bool inStockEquality = (this.GetInStock() == newCopy.GetInStock());
+        bool checkedOutEquality = (this.GetCheckedOut() == newCopy.GetCheckedOut());
+        return (idEquality && nameEquality && inStockEquality && checkedOutEquality);
+      }
+    }
 
-    // public override int GetHashCode()
-    // {
-    //   return this.GetName().GetHashCode();
-    // }
+    public override int GetHashCode()
+    {
+      return this.GetName().GetHashCode();
+    }
 
     public static List<Copy> GetAll()
     {
