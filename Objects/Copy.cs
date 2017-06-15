@@ -87,37 +87,37 @@ namespace Library
       return AllCopy;
     }
 
-    // public void Save()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("INSERT INTO copies (name, in_stock, checked_out) OUTPUT INSERTED.id VALUES (@name, @inStock, @checkedOut);", conn);
-    //
-    //   SqlParameter namePara = new SqlParameter("@name", this.GetName());
-    //   SqlParameter inStockPara = new SqlParameter("@inStock", this.GetInStock());
-    //   SqlParameter checkedOut = new SqlParameter("@checkedOut", this.GetCheckedOut());
-    //
-    //   cmd.Parameters.Add(namePara);
-    //   cmd.Parameters.Add(inStockPara);
-    //   cmd.Parameters.Add(checkedOut);
-    //
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   while(rdr.Read())
-    //   {
-    //     this._id = rdr.GetInt32(0);
-    //   }
-    //   if(rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if(conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
-    //
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO copies (name, in_stock, checked_out) OUTPUT INSERTED.id VALUES (@name, @inStock, @checkedOut);", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", this.GetName());
+      SqlParameter inStockPara = new SqlParameter("@inStock", this.GetInStock());
+      SqlParameter checkedOut = new SqlParameter("@checkedOut", this.GetCheckedOut());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(inStockPara);
+      cmd.Parameters.Add(checkedOut);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
+    
     // public static Copy Find(int id)
     // {
     //   SqlConnection conn = DB.Connection();

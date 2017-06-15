@@ -34,21 +34,21 @@ namespace Library
       Assert.Equal(Copy1, Copy2);
     }
 
-    // [Fact]
-    // public void Test_Save_SavesToDatabase()
-    // {
-    //  //Arrange
-    // Copy testCopy = new Copy("The Old Man and the Sea", "Literature", new DateTime(2017, 02, 28));
-    //
-    //  //Act
-    //  testCopy.Save();
-    //  List<Copy> result =Copy.GetAll();
-    //  List<Copy> testList = new List<Copy>{testCopy};
-    //
-    //  //Assert
-    //  Assert.Equal(testList, result);
-    // }
-    //
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+     //Arrange
+    Copy testCopy = new Copy("The Old Man and the Sea", 4, 3);
+
+     //Act
+     testCopy.Save();
+     List<Copy> result = Copy.GetAll();
+     List<Copy> testList = new List<Copy>{testCopy};
+
+     //Assert
+     Assert.Equal(testList, result);
+    }
+
     // [Fact]
     // public void Test_Find_FindCopyInDatabase()
     // {
