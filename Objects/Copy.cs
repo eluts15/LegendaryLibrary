@@ -147,7 +147,6 @@ namespace Library
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name WHERE id = @Id; UPDATE copies SET due = @due WHERE id = @Id;", conn);
-    //  SqlCommand cmd = new SqlCommand("UPDATE copies SET due = @due WHERE id = @Id;", conn);
 
       SqlParameter namePara = new SqlParameter("@name", name);
       SqlParameter duePara = new SqlParameter("@due", due);

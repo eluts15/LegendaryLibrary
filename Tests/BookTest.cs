@@ -28,8 +28,8 @@ namespace Library
     public void Test_Override_ObjectsAreEqual()
     {
       //Arrange, Act
-      Book book1 = new Book("Moby Dick'd", "required reading");
-      Book book2 = new Book("Moby Dick'd", "required reading");
+      Book book1 = new Book("Moby Dick'd", "required reading", 4);
+      Book book2 = new Book("Moby Dick'd", "required reading", 4);
       //Assert
       Assert.Equal(book1, book2);
     }
@@ -38,7 +38,7 @@ namespace Library
     public void Test_Save_SavesToDatabase()
     {
      //Arrange
-    Book testBook = new Book("The Old Man and the Sea", "Literature");
+    Book testBook = new Book("The Old Man and the Sea", "Literature", 3);
 
      //Act
      testBook.Save();
@@ -53,7 +53,7 @@ namespace Library
     public void Test_Find_FindBookInDatabase()
     {
       //Arrange
-      Book testBook = new Book("The Hobbit", "Fantasy");
+      Book testBook = new Book("The Hobbit", "Fantasy", 6);
       testBook.Save();
 
       //Act
@@ -67,11 +67,11 @@ namespace Library
     public void Test_Update_UpdatesBookInDatabase()
     {
       //Arrange
-      Book testBook = new Book("The Art of Deal", "Actual Garbage");
+      Book testBook = new Book("The Art of Deal", "Actual Garbage", 0);
       testBook.Save();
       string newGenre = "Burn this";
       //Act
-      testBook.Update("The Art of Deal", "Burn this");
+      testBook.Update("The Art of Deal", "Burn this", 0);
       string result = testBook.GetGenre();
 
       //Assert
@@ -83,7 +83,7 @@ namespace Library
     public void GetAuthors_ReturnsAllBookAuthors_AuthorList()
     {
       //Arrange
-      Book testBook = new Book("The C Programming Language", "Reference Book");
+      Book testBook = new Book("The C Programming Language", "Reference Book", 9000);
       testBook.Save();
 
       Author testAuthors1 = new Author("Biran W. Kernighan");
@@ -104,7 +104,7 @@ namespace Library
     public void AddAuthor_AddsAuthorsToBook_AuthorsList()
     {
       //Arrange
-      Book testBook = new Book("The Go Programming Language", "Reference");
+      Book testBook = new Book("The Go Programming Language", "Reference", 5);
       testBook.Save();
 
       Author testAuthors = new Author("Alan A. A. Donvoan");
@@ -127,7 +127,7 @@ namespace Library
       Author testAuthor = new Author("Stephen King");
       testAuthor.Save();
 
-      Book testBooks = new Book("It", "Horror");
+      Book testBooks = new Book("It", "Horror", 10);
       testBooks.Save();
 
       //Act

@@ -10,11 +10,13 @@ namespace Library
     private int _id;
     private string _name;
     private string _genre;
+    private int _copies;
 
-    public Book(string name, string genre, int id = 0)
+    public Book(string name, string genre, int copies, int id = 0)
     {
       _name = name;
       _genre = genre;
+      _copies = copies;
       _id = id;
     }
 
@@ -30,6 +32,10 @@ namespace Library
     {
       return _genre;
     }
+    public int GetCopies()
+    {
+      return _copies;
+    }
 
     public override bool Equals(System.Object otherBook)
     {
@@ -43,7 +49,8 @@ namespace Library
         bool idEquality = (this.GetId() == newBook.GetId());
         bool nameEquality = (this.GetName() == newBook.GetName());
         bool genreEquality = (this.GetGenre() == newBook.GetGenre());
-        return (idEquality && nameEquality && genreEquality);
+        bool copiesEquality = (this.GetCopies() == newBook.GetCopies());
+        return (idEquality && nameEquality && genreEquality && copiesEquality);
       }
     }
 
@@ -65,7 +72,8 @@ namespace Library
         int id = rdr.GetInt32(0);
         string name = rdr.GetString(1);
         string genre = rdr.GetString(2);
-        Book newBook = new Book(name, genre, id);
+        int copies = rdr.GetInt32(3);
+        Book newBook = new Book(name, genre, copies, id);
         AllBook.Add(newBook);
       }
       if (rdr != null)
@@ -84,13 +92,15 @@ namespace Library
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO books (name, genre) OUTPUT INSERTED.id VALUES (@name, @genre);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO books (name, genre, copies) OUTPUT INSERTED.id VALUES (@name, @genre, @copies);", conn);
 
       SqlParameter namePara = new SqlParameter("@name", this.GetName());
       SqlParameter genrePara = new SqlParameter("@genre", this.GetGenre());
+      SqlParameter copiesPara = new SqlParameter("@copies", this.GetCopies());
 
       cmd.Parameters.Add(namePara);
       cmd.Parameters.Add(genrePara);
+      cmd.Parameters.Add(copiesPara);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -122,14 +132,16 @@ namespace Library
       int foundId = 0;
       string name = null;
       string genre = null;
+      int copies = 0;
 
       while(rdr.Read())
       {
         foundId = rdr.GetInt32(0);
         name = rdr.GetString(1);
         genre = rdr.GetString(2);
+        copies = rdr.GetInt32(3);
       }
-      Book foundBook = new Book(name, genre, foundId);
+      Book foundBook = new Book(name, genre, copies, foundId);
       if (rdr != null)
       {
         rdr.Close();
@@ -141,23 +153,26 @@ namespace Library
       return foundBook;
     }
 
-    public void Update(string name, string genre)
+    public void Update(string name, string genre, int copies)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE books SET name = @name, genre = @genre WHERE id = @Id;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE books SET name = @name, genre = @genre, copies = @copies WHERE id = @Id;", conn);
 
       SqlParameter namePara = new SqlParameter("@name", name);
       SqlParameter genrePara = new SqlParameter("@genre", genre);
+      SqlParameter copiesPara = new SqlParameter("@copies", copies);
       SqlParameter idPara = new SqlParameter("@Id", this.GetId());
 
       cmd.Parameters.Add(namePara);
       cmd.Parameters.Add(genrePara);
+      cmd.Parameters.Add(copiesPara);
       cmd.Parameters.Add(idPara);
 
       this._name = name;
       this._genre = genre;
+      this._copies = copies;
       cmd.ExecuteNonQuery();
       conn.Close();
     }

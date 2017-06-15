@@ -83,10 +83,10 @@ namespace Library
      Author testAuthor = new Author("Ursula K. Le Guin");
      testAuthor.Save();
 
-     Book testBook1 = new Book("A Wrinkle In Time", "Fantasy");
+     Book testBook1 = new Book("A Wrinkle In Time", "Fantasy", 6);
      testBook1.Save();
 
-     Book testBook2 = new Book("A Wizard of EarthSea", "Fantasy");
+     Book testBook2 = new Book("A Wizard of EarthSea", "Fantasy", 7);
      testBook2.Save();
 
      //Act
@@ -105,10 +105,10 @@ namespace Library
       Author testAuthor = new Author("Kurt Vonnegut, Jr.");
       testAuthor.Save();
 
-      Book testBook = new Book("Slaughterhouse Five", "Fiction");
+      Book testBook = new Book("Slaughterhouse Five", "Fiction", 8);
       testBook.Save();
 
-      Book testBook2 = new Book("Breakfast of Champions", "Fiction");
+      Book testBook2 = new Book("Breakfast of Champions", "Fiction", 9);
       testBook2.Save();
 
       //Act
@@ -126,7 +126,7 @@ namespace Library
     public void Delete_DeletesAuthorAssociationsFromDatabase_AuthorList()
     {
       //Arrange
-      Book testBook = new Book("The Unbearable Lightness of Being", "Realistic Fiction");
+      Book testBook = new Book("The Unbearable Lightness of Being", "Realistic Fiction", 13);
       testBook.Save();
 
       Author testAuthor = new Author("Milan Kundera");
