@@ -80,46 +80,46 @@ namespace Library
 
 //these methods utilize our join tables, and so we have to build our patron object first.
 
-    // [Fact]
-    // public void GetPatrons_ReturnsAllCopyPatrons_PatronList()
-    // {
-    //   //Arrange
-    //   Copy testCopy = new Copy("The C Programming Language", 12, 25);
-    //   testCopy.Save();
-    //
-    //   Patron testPatrons1 = new Patron("B-r0n Whitwicky");
-    //   testPatrons1.Save();
-    //
-    //   Patron testPatrons2 = new Patron("Mitch Mitchell");
-    //   testPatrons2.Save();
-    //
-    //   //Act
-    //   testCopy.AddPatron(testPatrons1);
-    //   List<Patron> result = testCopy.GetPatrons();
-    //   List<Patron> testList = new List<Patron> {testPatrons1};
-    //
-    //   //Assert
-    //   Assert.Equal(testList, result);
-    // }
-    // [Fact]
-    // public void AddPatron_AddsPatronsToCopy_PatronsList()
-    // {
-    //   //Arrange
-    //   Copy testCopy = new Copy("The Go Programming Language", 34, 1);
-    //   testCopy.Save();
-    //
-    //   Patron testPatrons = new Patron("Alan Alda");
-    //   testPatrons.Save();
-    //
-    //   //Act
-    //   testCopy.AddPatron(testPatrons);
-    //
-    //   List<Patron> result = testCopy.GetPatrons();
-    //   List<Patron> testList = new List<Patron>{testPatrons};
-    //
-    //   //Assert
-    //   Assert.Equal(testList, result);
-    // }
+    [Fact]
+    public void GetPatrons_ReturnsAllCopyPatrons_PatronList()
+    {
+      //Arrange
+      Copy testCopy = new Copy("The C Programming Language", 12, 25);
+      testCopy.Save();
+
+      Patron testPatrons1 = new Patron("B-r0n Whitwicky");
+      testPatrons1.Save();
+
+      Patron testPatrons2 = new Patron("Mitch Mitchell");
+      testPatrons2.Save();
+
+      //Act
+      testCopy.AddPatron(testPatrons1);
+      List<Patron> result = testCopy.GetPatrons();
+      List<Patron> testList = new List<Patron> {testPatrons1};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+    [Fact]
+    public void AddPatron_AddsPatronsToCopy_PatronsList()
+    {
+      //Arrange
+      Copy testCopy = new Copy("The Go Programming Language", 34, 1);
+      testCopy.Save();
+
+      Patron testPatrons = new Patron("Alan Alda");
+      testPatrons.Save();
+
+      //Act
+      testCopy.AddPatron(testPatrons);
+
+      List<Patron> result = testCopy.GetPatrons();
+      List<Patron> testList = new List<Patron>{testPatrons};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
     //
     // [Fact]
     // public void Delete_DeletesCopysAssociationsFromDatabase_CopysList()
