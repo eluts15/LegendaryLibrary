@@ -164,9 +164,7 @@ namespace Library
       {
         int copyId = rdr.GetInt32(0);
         string name = rdr.GetString(1);
-        int inStock = rdr.GetInt32(2);
-        int checkedOut = rdr.GetInt32(3);
-        Copy newCopy = new Copy(name, inStock, checkedOut, copyId);
+        Copy newCopy = new Copy(name, copyId);
         Copies.Add(newCopy);
       }
 

@@ -9,14 +9,10 @@ namespace Library
   {
     private int _id;
     private string _name;
-    private int _inStock;
-    private int _checkedOut;
 
-    public Copy(string name, int inStock, int checkedOut, int id = 0)
+    public Copy(string name, int id = 0)
     {
       _name = name;
-      _inStock = inStock;
-      _checkedOut = checkedOut;
       _id = id;
     }
 
@@ -28,14 +24,7 @@ namespace Library
     {
       return _name;
     }
-    public int GetInStock()
-    {
-      return _inStock;
-    }
-    public int GetCheckedOut()
-    {
-      return _checkedOut;
-    }
+
 
     public override bool Equals(System.Object otherCopy)
     {
@@ -48,9 +37,7 @@ namespace Library
         Copy newCopy = (Copy) otherCopy;
         bool idEquality = (this.GetId() == newCopy.GetId());
         bool nameEquality = (this.GetName() == newCopy.GetName());
-        bool inStockEquality = (this.GetInStock() == newCopy.GetInStock());
-        bool checkedOutEquality = (this.GetCheckedOut() == newCopy.GetCheckedOut());
-        return (idEquality && nameEquality && inStockEquality && checkedOutEquality);
+        return (idEquality && nameEquality);
       }
     }
 
@@ -71,9 +58,7 @@ namespace Library
       {
         int id = rdr.GetInt32(0);
         string name = rdr.GetString(1);
-        int inStock = rdr.GetInt32(2);
-        int checkedOut = rdr.GetInt32(3);
-        Copy newCopy = new Copy(name, inStock, checkedOut, id);
+        Copy newCopy = new Copy(name, id);
         AllCopy.Add(newCopy);
       }
       if (rdr != null)
@@ -92,15 +77,11 @@ namespace Library
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO copies (name, in_stock, checked_out) OUTPUT INSERTED.id VALUES (@name, @inStock, @checkedOut);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO copies (name) OUTPUT INSERTED.id VALUES (@name);", conn);
 
       SqlParameter namePara = new SqlParameter("@name", this.GetName());
-      SqlParameter inStockPara = new SqlParameter("@inStock", this.GetInStock());
-      SqlParameter checkedOut = new SqlParameter("@checkedOut", this.GetCheckedOut());
 
       cmd.Parameters.Add(namePara);
-      cmd.Parameters.Add(inStockPara);
-      cmd.Parameters.Add(checkedOut);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -131,17 +112,13 @@ namespace Library
 
       int foundId = 0;
       string name = null;
-      int inStock = 0;
-      int checkedOut = 0;
 
       while(rdr.Read())
       {
         foundId = rdr.GetInt32(0);
         name = rdr.GetString(1);
-        inStock = rdr.GetInt32(2);
-        checkedOut = rdr.GetInt32(3);
       }
-      Copy foundCopy = new Copy(name, inStock, checkedOut, foundId);
+      Copy foundCopy = new Copy(name, foundId);
       if (rdr != null)
       {
         rdr.Close();
@@ -153,26 +130,21 @@ namespace Library
       return foundCopy;
     }
     //
-    public void Update(string name, int inStock, int checkedOut)
+    public void Update(string name)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name, checked_out = @checkedOut, in_stock = @inStock WHERE id = @Id;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name WHERE id = @Id;", conn);
 
       SqlParameter namePara = new SqlParameter("@name", name);
-      SqlParameter inStockPara = new SqlParameter("@inStock", inStock);
-      SqlParameter checkedOutPara = new SqlParameter("@checkedOut", checkedOut);
+
       SqlParameter idPara = new SqlParameter("@Id", this.GetId());
 
       cmd.Parameters.Add(namePara);
-      cmd.Parameters.Add(inStockPara);
-      cmd.Parameters.Add(checkedOutPara);
       cmd.Parameters.Add(idPara);
 
       this._name = name;
-      this._inStock = inStock;
-      this._checkedOut = checkedOut;
       cmd.ExecuteNonQuery();
       conn.Close();
     }

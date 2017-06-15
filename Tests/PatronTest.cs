@@ -83,10 +83,10 @@ namespace Library
      Patron testPatron = new Patron("Charles McMahon");
      testPatron.Save();
 
-     Copy testCopy1 = new Copy("A Wrinkle In Time", 4, 5);
+     Copy testCopy1 = new Copy("A Wrinkle In Time");
      testCopy1.Save();
 
-     Copy testCopy2 = new Copy("A Wizard of EarthSea", 1, 6);
+     Copy testCopy2 = new Copy("A Wizard of EarthSea");
      testCopy2.Save();
 
      //Act
@@ -105,10 +105,10 @@ namespace Library
       Patron testPatron = new Patron("George Beasely");
       testPatron.Save();
 
-      Copy testCopy = new Copy("Slaughterhouse Five", 7, 2);
+      Copy testCopy = new Copy("Slaughterhouse Five");
       testCopy.Save();
 
-      Copy testCopy2 = new Copy("Breakfast of Champions", 3, 5);
+      Copy testCopy2 = new Copy("Breakfast of Champions");
       testCopy2.Save();
 
       //Act
@@ -125,7 +125,7 @@ namespace Library
     public void Delete_DeletesPatronAssociationsFromDatabase_PatronList()
     {
       //Arrange
-      Copy testCopy = new Copy("The Unbearable Lightness of Being", 4, 2);
+      Copy testCopy = new Copy("The Unbearable Lightness of Being");
       testCopy.Save();
 
       Patron testPatron = new Patron("Dan Rather");

@@ -28,8 +28,8 @@ namespace Library
     public void Test_Override_ObjectsAreEqual()
     {
       //Arrange, Act
-      Book book1 = new Book("Moby Dick'd", "required reading", new DateTime(1851, 11, 14));
-      Book book2 = new Book("Moby Dick'd", "required reading", new DateTime(1851, 11, 14));
+      Book book1 = new Book("Moby Dick'd", "required reading");
+      Book book2 = new Book("Moby Dick'd", "required reading");
       //Assert
       Assert.Equal(book1, book2);
     }
@@ -38,7 +38,7 @@ namespace Library
     public void Test_Save_SavesToDatabase()
     {
      //Arrange
-    Book testBook = new Book("The Old Man and the Sea", "Literature", new DateTime(2017, 02, 28));
+    Book testBook = new Book("The Old Man and the Sea", "Literature");
 
      //Act
      testBook.Save();
@@ -53,7 +53,7 @@ namespace Library
     public void Test_Find_FindBookInDatabase()
     {
       //Arrange
-      Book testBook = new Book("The Hobbit", "Fantasy", new DateTime(2017, 07, 21));
+      Book testBook = new Book("The Hobbit", "Fantasy");
       testBook.Save();
 
       //Act
@@ -67,15 +67,15 @@ namespace Library
     public void Test_Update_UpdatesBookInDatabase()
     {
       //Arrange
-      Book testBook = new Book("The Art of Deal", "Actual Garbage", new DateTime(2017, 09, 27));
+      Book testBook = new Book("The Art of Deal", "Actual Garbage");
       testBook.Save();
-      DateTime newDueDate = new DateTime(2017, 12, 03);
+      string newGenre = "Burn this";
       //Act
-      testBook.Update("The Art of Deal", "Actual Garbage", new DateTime(2017, 12, 03));
-      DateTime result = testBook.GetDueDate();
+      testBook.Update("The Art of Deal", "Burn this");
+      string result = testBook.GetGenre();
 
       //Assert
-      Assert.Equal(newDueDate, result);
+      Assert.Equal(newGenre, result);
     }
 
 
@@ -83,7 +83,7 @@ namespace Library
     public void GetAuthors_ReturnsAllBookAuthors_AuthorList()
     {
       //Arrange
-      Book testBook = new Book("The C Programming Language", "Reference Book", new DateTime(2018, 03, 16));
+      Book testBook = new Book("The C Programming Language", "Reference Book");
       testBook.Save();
 
       Author testAuthors1 = new Author("Biran W. Kernighan");
@@ -104,7 +104,7 @@ namespace Library
     public void AddAuthor_AddsAuthorsToBook_AuthorsList()
     {
       //Arrange
-      Book testBook = new Book("The Go Programming Language", "Reference", new DateTime(2016, 10, 27));
+      Book testBook = new Book("The Go Programming Language", "Reference");
       testBook.Save();
 
       Author testAuthors = new Author("Alan A. A. Donvoan");
@@ -127,7 +127,7 @@ namespace Library
       Author testAuthor = new Author("Stephen King");
       testAuthor.Save();
 
-      Book testBooks = new Book("It", "Horror", new DateTime(2015, 09, 29));
+      Book testBooks = new Book("It", "Horror");
       testBooks.Save();
 
       //Act

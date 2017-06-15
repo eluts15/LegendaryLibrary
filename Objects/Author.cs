@@ -166,8 +166,7 @@ namespace Library
         int bookId = rdr.GetInt32(0);
         string name = rdr.GetString(1);
         string genre = rdr.GetString(2);
-        DateTime dueDate = rdr.GetDateTime(3);
-        Book newBook = new Book(name, genre, dueDate, bookId);
+        Book newBook = new Book(name, genre, bookId);
         books.Add(newBook);
       }
 

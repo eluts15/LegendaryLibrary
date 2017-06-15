@@ -10,13 +10,11 @@ namespace Library
     private int _id;
     private string _name;
     private string _genre;
-    private DateTime _dueDate;
 
-    public Book(string name, string genre, DateTime dueDate, int id = 0)
+    public Book(string name, string genre, int id = 0)
     {
       _name = name;
       _genre = genre;
-      _dueDate = dueDate;
       _id = id;
     }
 
@@ -32,10 +30,6 @@ namespace Library
     {
       return _genre;
     }
-    public DateTime GetDueDate()
-    {
-      return _dueDate;
-    }
 
     public override bool Equals(System.Object otherBook)
     {
@@ -49,8 +43,7 @@ namespace Library
         bool idEquality = (this.GetId() == newBook.GetId());
         bool nameEquality = (this.GetName() == newBook.GetName());
         bool genreEquality = (this.GetGenre() == newBook.GetGenre());
-        bool dueDateEquality = (this.GetDueDate() == newBook.GetDueDate());
-        return (idEquality && nameEquality && genreEquality && dueDateEquality);
+        return (idEquality && nameEquality && genreEquality);
       }
     }
 
@@ -72,8 +65,7 @@ namespace Library
         int id = rdr.GetInt32(0);
         string name = rdr.GetString(1);
         string genre = rdr.GetString(2);
-        DateTime dueDate = rdr.GetDateTime(3);
-        Book newBook = new Book(name, genre, dueDate, id);
+        Book newBook = new Book(name, genre, id);
         AllBook.Add(newBook);
       }
       if (rdr != null)
@@ -92,15 +84,13 @@ namespace Library
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO books (name, genre, due_date) OUTPUT INSERTED.id VALUES (@name, @genre, @dueDate);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO books (name, genre) OUTPUT INSERTED.id VALUES (@name, @genre);", conn);
 
       SqlParameter namePara = new SqlParameter("@name", this.GetName());
       SqlParameter genrePara = new SqlParameter("@genre", this.GetGenre());
-      SqlParameter dueDate = new SqlParameter("@dueDate", this.GetDueDate());
 
       cmd.Parameters.Add(namePara);
       cmd.Parameters.Add(genrePara);
-      cmd.Parameters.Add(dueDate);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -132,16 +122,14 @@ namespace Library
       int foundId = 0;
       string name = null;
       string genre = null;
-      DateTime dueDate = new DateTime();
 
       while(rdr.Read())
       {
         foundId = rdr.GetInt32(0);
         name = rdr.GetString(1);
         genre = rdr.GetString(2);
-        dueDate = rdr.GetDateTime(3);
       }
-      Book foundBook = new Book(name, genre, dueDate, foundId);
+      Book foundBook = new Book(name, genre, foundId);
       if (rdr != null)
       {
         rdr.Close();
@@ -153,26 +141,23 @@ namespace Library
       return foundBook;
     }
 
-    public void Update(string name, string genre, DateTime dueDate)
+    public void Update(string name, string genre)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE books SET name = @name, due_date = @dueDate, genre = @genre WHERE id = @Id;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE books SET name = @name, genre = @genre WHERE id = @Id;", conn);
 
       SqlParameter namePara = new SqlParameter("@name", name);
       SqlParameter genrePara = new SqlParameter("@genre", genre);
-      SqlParameter dueDatePara = new SqlParameter("@dueDate", dueDate);
       SqlParameter idPara = new SqlParameter("@Id", this.GetId());
 
       cmd.Parameters.Add(namePara);
       cmd.Parameters.Add(genrePara);
-      cmd.Parameters.Add(dueDatePara);
       cmd.Parameters.Add(idPara);
 
       this._name = name;
       this._genre = genre;
-      this._dueDate = dueDate;
       cmd.ExecuteNonQuery();
       conn.Close();
     }
