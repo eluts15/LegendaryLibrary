@@ -86,11 +86,11 @@ namespace Library
 
       SqlCommand cmd = new SqlCommand("INSERT INTO copies (name, due) OUTPUT INSERTED.id VALUES (@name, @due);", conn);
 
-      SqlParameter namePara = new SqlParameter("@name", this.GetName());
-      SqlParameter duePara = new SqlParameter("@due", this.GetDue());
+      SqlParameter nameParam = new SqlParameter("@name", this.GetName());
+      SqlParameter dueParam = new SqlParameter("@due", this.GetDue());
 
-      cmd.Parameters.Add(namePara);
-      cmd.Parameters.Add(duePara);
+      cmd.Parameters.Add(nameParam);
+      cmd.Parameters.Add(dueParam);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -114,9 +114,9 @@ namespace Library
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("SELECT * FROM copies WHERE id = @id;", conn);
-      SqlParameter idParameter = new SqlParameter("@id", id.ToString());
+      SqlParameter idParamm = new SqlParameter("@id", id.ToString());
 
-      cmd.Parameters.Add(idParameter);
+      cmd.Parameters.Add(idParamm);
       SqlDataReader rdr = cmd.ExecuteReader();
 
       int foundId = 0;
@@ -148,13 +148,13 @@ namespace Library
 
       SqlCommand cmd = new SqlCommand("UPDATE copies SET name = @name WHERE id = @Id; UPDATE copies SET due = @due WHERE id = @Id;", conn);
 
-      SqlParameter namePara = new SqlParameter("@name", name);
-      SqlParameter duePara = new SqlParameter("@due", due);
-      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+      SqlParameter nameParam = new SqlParameter("@name", name);
+      SqlParameter dueParam = new SqlParameter("@due", due);
+      SqlParameter idParam = new SqlParameter("@Id", this.GetId());
 
-      cmd.Parameters.Add(namePara);
-      cmd.Parameters.Add(idPara);
-      cmd.Parameters.Add(duePara);
+      cmd.Parameters.Add(nameParam);
+      cmd.Parameters.Add(idParam);
+      cmd.Parameters.Add(dueParam);
 
       this._name = name;
       this._due = due;
@@ -203,11 +203,11 @@ namespace Library
 
       SqlCommand cmd = new SqlCommand("INSERT INTO patrons_copies (patron_id, copy_id) VALUES (@PatronId, @CopyId);", conn);
 
-      SqlParameter copyIdParameter = new SqlParameter("@CopyId", this.GetId());
-      SqlParameter patronIdParameter = new SqlParameter( "@PatronId", newPatron.GetId());
+      SqlParameter copyIdParam = new SqlParameter("@CopyId", this.GetId());
+      SqlParameter patronIdParam = new SqlParameter( "@PatronId", newPatron.GetId());
 
-      cmd.Parameters.Add(copyIdParameter);
-      cmd.Parameters.Add(patronIdParameter);
+      cmd.Parameters.Add(copyIdParam);
+      cmd.Parameters.Add(patronIdParam);
       cmd.ExecuteNonQuery();
       if (conn != null)
       {
@@ -221,9 +221,9 @@ namespace Library
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("DELETE FROM copies WHERE id = @copyId; DELETE FROM patrons_copies WHERE copy_id = @copyId;", conn);
-      SqlParameter copyIdParameter = new SqlParameter("@copyId", this.GetId());
+      SqlParameter copyIdParam = new SqlParameter("@copyId", this.GetId());
 
-      cmd.Parameters.Add(copyIdParameter);
+      cmd.Parameters.Add(copyIdParam);
       cmd.ExecuteNonQuery();
 
       if (conn != null)

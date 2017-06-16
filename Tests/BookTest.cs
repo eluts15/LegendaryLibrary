@@ -42,7 +42,7 @@ namespace Library
 
      //Act
      testBook.Save();
-     List<Book> result =Book.GetAll();
+     List<Book> result = Book.GetAll();
      List<Book> testList = new List<Book>{testBook};
 
      //Assert
@@ -80,13 +80,13 @@ namespace Library
 
 
     [Fact]
-    public void GetAuthors_ReturnsAllBookAuthors_AuthorList()
+    public void GetAuthors_ReturnsAllBooksAuthors_AuthorList()
     {
       //Arrange
       Book testBook = new Book("The C Programming Language", "Reference Book", 9000);
       testBook.Save();
 
-      Author testAuthors1 = new Author("Biran W. Kernighan");
+      Author testAuthors1 = new Author("Brian W. Kernighan");
       testAuthors1.Save();
 
       Author testAuthors2 = new Author("Dennis M. Ritchie");

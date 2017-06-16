@@ -79,9 +79,9 @@ namespace Library
 
      SqlCommand cmd = new SqlCommand("INSERT INTO authors (name) OUTPUT INSERTED.id VALUES (@name);", conn);
 
-     SqlParameter namePara = new SqlParameter("@name", this.GetName());
+     SqlParameter nameParam = new SqlParameter("@name", this.GetName());
 
-     cmd.Parameters.Add(namePara);
+     cmd.Parameters.Add(nameParam);
      SqlDataReader rdr = cmd.ExecuteReader();
 
      while(rdr.Read())
@@ -104,9 +104,9 @@ namespace Library
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("SELECT * FROM authors WHERE id = @id;", conn);
-      SqlParameter IdPara = new SqlParameter("@id", id.ToString());
+      SqlParameter IdParam = new SqlParameter("@id", id.ToString());
 
-      cmd.Parameters.Add(IdPara);
+      cmd.Parameters.Add(IdParam);
       SqlDataReader rdr = cmd.ExecuteReader();
 
       int foundId = 0;
@@ -136,11 +136,11 @@ namespace Library
 
       SqlCommand cmd = new SqlCommand("UPDATE authors SET name = @name WHERE id = @Id;", conn);
 
-      SqlParameter namePara = new SqlParameter("@name", name);
-      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+      SqlParameter nameParam = new SqlParameter("@name", name);
+      SqlParameter idParam = new SqlParameter("@Id", this.GetId());
 
-      cmd.Parameters.Add(namePara);
-      cmd.Parameters.Add(idPara);
+      cmd.Parameters.Add(nameParam);
+      cmd.Parameters.Add(idParam);
 
       this._name = name;
       cmd.ExecuteNonQuery();
@@ -190,11 +190,11 @@ namespace Library
 
       SqlCommand cmd = new SqlCommand("INSERT INTO books_authors (book_id, author_id) VALUES (@BookId, @AuthorId);", conn);
 
-      SqlParameter bookIdParameter = new SqlParameter( "@BookId", newBook.GetId());
-      SqlParameter authorIdParameter = new SqlParameter("@AuthorId", this.GetId());
+      SqlParameter bookIdParam = new SqlParameter( "@BookId", newBook.GetId());
+      SqlParameter authorIdParam = new SqlParameter("@AuthorId", this.GetId());
 
-      cmd.Parameters.Add(bookIdParameter);
-      cmd.Parameters.Add(authorIdParameter);
+      cmd.Parameters.Add(bookIdParam);
+      cmd.Parameters.Add(authorIdParam);
       cmd.ExecuteNonQuery();
       if (conn != null)
       {
@@ -208,9 +208,9 @@ namespace Library
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("DELETE FROM authors WHERE id = @Id; DELETE FROM books_authors WHERE author_id = @Id;", conn);
-      SqlParameter IdParameter = new SqlParameter("@Id", this.GetId());
+      SqlParameter IdParam = new SqlParameter("@Id", this.GetId());
 
-      cmd.Parameters.Add(IdParameter);
+      cmd.Parameters.Add(IdParam);
       cmd.ExecuteNonQuery();
 
       if (conn != null)
